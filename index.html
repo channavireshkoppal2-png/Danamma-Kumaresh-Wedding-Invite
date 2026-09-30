@@ -12,7 +12,7 @@
             --gold: #C5A059;
             --gold-light: #F3E5AB;
             --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-            --bg-cream: #FAF7F2;
+            --bg-cream: #FAF8F5;
             --text-dark: #333333;
             --card-bg: #FFFFFF;
         }
@@ -33,6 +33,19 @@
             position: relative;
         }
 
+        /* --- WHITISH GLITTER BACKGROUND OVERLAY --- */
+        .whitish-glitter-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(250, 248, 245, 0.95) 100%),
+                        radial-gradient(ellipse at top, rgba(243, 229, 171, 0.25), transparent);
+            pointer-events: none;
+            z-index: 0;
+        }
+
         /* --- CONTINUOUS GLITTER & STAR CANVAS --- */
         #glitter-canvas {
             position: fixed;
@@ -51,7 +64,8 @@
             left: 0;
             width: 100%;
             height: 60px;
-            background: #FFFDF9;
+            background: rgba(255, 253, 249, 0.95);
+            backdrop-filter: blur(5px);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -267,8 +281,10 @@
             pointer-events: none;
         }
 
-        /* --- MAIN INVITATION CARD (FIRST PAGE) --- */
+        /* --- MAIN INVITATION FIRST PAGE --- */
         #main-invitation {
+            position: relative;
+            z-index: 1;
             padding-top: 80px;
             padding-bottom: 40px;
             opacity: 0;
@@ -291,7 +307,9 @@
             border: 1px solid rgba(197, 160, 89, 0.5);
             padding: 8px;
             border-radius: 4px;
-            background: transparent;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(3px);
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.08);
         }
 
         .hero-inner-border {
@@ -300,7 +318,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.5);
         }
 
         .tagline {
@@ -386,13 +404,14 @@
         }
 
         .timeline-item {
-            background: #FFFFFF;
+            background: rgba(255, 255, 255, 0.85);
             border-left: 3px solid var(--gold);
             margin: 20px 0;
             padding: 20px;
             text-align: left;
             box-shadow: 0 2px 10px rgba(0,0,0,0.03);
             font-family: 'Montserrat', sans-serif;
+            backdrop-filter: blur(2px);
         }
 
         .timeline-item h3 {
@@ -408,12 +427,17 @@
             border-top: 2px solid var(--gold);
             font-family: 'Montserrat', sans-serif;
             font-size: 0.85rem;
+            position: relative;
+            z-index: 2;
         }
     </style>
 </head>
 <body>
 
-    <!-- CANVAS FOR ANIMATED STAR & GLITTER FLOATING particles -->
+    <!-- WHITISH GLITTER BACKGROUND LAYER -->
+    <div class="whitish-glitter-bg"></div>
+
+    <!-- CANVAS FOR ANIMATED STAR & GLITTER FLOATING PARTICLES -->
     <canvas id="glitter-canvas"></canvas>
 
     <!-- TOP HEADER WITH MONOGRAM & MENU -->
@@ -491,7 +515,7 @@
                 <div class="couple-names">Danamma</div>
 
                 <div class="wedding-date">FRIDAY, DECEMBER 18, 2026</div>
-                <div class="wedding-location">KARNATAKA, INDIA</div>
+                <div class="wedding-location">ALMATTI, KARNATAKA, INDIA</div>
 
                 <div class="begun-text">OUR WEDDING HAS BEGUN!</div>
 
@@ -582,7 +606,7 @@
             }
         }
 
-        /* --- CONTINUOUS GLITTER & STAR ANIMATION ENGINE --- */
+        /* --- CONTINUOUS WHITISH & GOLD GLITTER ENGINE --- */
         const canvas = document.getElementById('glitter-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -593,9 +617,10 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        const particleCount = 60;
+        const particleCount = 75;
         const particles = [];
-        const goldColors = ['#D4AF37', '#F3E5AB', '#FFFDF8', '#E6CA65', '#AA771C'];
+        // Light whitish and warm gold sparkle colors
+        const glitterColors = ['#FFFFFF', '#FFFDF5', '#F3E5AB', '#E8D28B', '#D4AF37'];
 
         class Particle {
             constructor() {
@@ -605,13 +630,13 @@
             reset(initial = false) {
                 this.x = Math.random() * canvas.width;
                 this.y = initial ? Math.random() * canvas.height : -20;
-                this.size = Math.random() * 2.5 + 1;
-                this.speedY = Math.random() * 0.7 + 0.3;
+                this.size = Math.random() * 2.8 + 0.8;
+                this.speedY = Math.random() * 0.6 + 0.2;
                 this.speedX = Math.sin(Math.random() * Math.PI * 2) * 0.3;
-                this.color = goldColors[Math.floor(Math.random() * goldColors.length)];
-                this.opacity = Math.random() * 0.8 + 0.2;
+                this.color = glitterColors[Math.floor(Math.random() * glitterColors.length)];
+                this.opacity = Math.random() * 0.85 + 0.15;
                 this.twinkleSpeed = Math.random() * 0.03 + 0.01;
-                this.isStar = Math.random() > 0.45;
+                this.isStar = Math.random() > 0.4;
                 this.angle = Math.random() * Math.PI;
                 this.spinSpeed = (Math.random() - 0.5) * 0.02;
             }
@@ -636,12 +661,12 @@
                 ctx.rotate(this.angle);
                 ctx.globalAlpha = this.opacity;
                 ctx.fillStyle = this.color;
-                ctx.shadowBlur = this.size * 2;
+                ctx.shadowBlur = this.size * 2.5;
                 ctx.shadowColor = this.color;
 
                 if (this.isStar) {
                     ctx.beginPath();
-                    const outer = this.size * 2;
+                    const outer = this.size * 2.2;
                     const inner = this.size * 0.4;
                     for (let i = 0; i < 4; i++) {
                         ctx.lineTo(Math.cos((i * Math.PI) / 2) * outer, Math.sin((i * Math.PI) / 2) * outer);

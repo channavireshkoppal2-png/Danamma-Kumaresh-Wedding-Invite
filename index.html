@@ -30,6 +30,18 @@
             line-height: 1.6;
             text-align: center;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- CONTINUOUS GLITTER & STAR CANVAS --- */
+        #glitter-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 10001; /* Layered above cover and main content */
         }
 
         /* --- FLOATING MUSIC TOGGLE BUTTON --- */
@@ -175,6 +187,8 @@
         #main-invitation {
             opacity: 0;
             transition: opacity 1s ease 0.5s;
+            position: relative;
+            z-index: 1;
         }
 
         .main-visible {
@@ -235,6 +249,9 @@
     </style>
 </head>
 <body>
+
+    <!-- ANIMATED GLITTER & STAR CANVAS -->
+    <canvas id="glitter-canvas"></canvas>
 
     <!-- AUDIO ELEMENT WITH COMPATIBLE FILE SOURCES -->
     <audio id="bg-music" loop playsinline preload="auto">
@@ -314,6 +331,7 @@
     </div>
 
     <script>
+        /* --- AUDIO CONTROLS --- */
         const audio = document.getElementById('bg-music');
         const musicBtn = document.getElementById('music-control');
         let isPlaying = false;
@@ -321,8 +339,6 @@
         function openInvitation() {
             document.getElementById('cover-screen').classList.add('cover-hidden');
             document.getElementById('main-invitation').classList.add('main-visible');
-
-            // Direct user action unlocks audio playback on mobile browsers
             startAudio();
         }
 
@@ -360,6 +376,101 @@
                 });
             }
         }
+
+        /* --- CONTINUOUS GLITTER & STAR ANIMATION ENGINE --- */
+        const canvas = document.getElementById('glitter-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const particleCount = 65;
+        const particles = [];
+        const goldColors = ['#D4AF37', '#F3E5AB', '#FFFDF8', '#E6CA65', '#AA771C'];
+
+        class Particle {
+            constructor() {
+                this.reset(true);
+            }
+
+            reset(initial = false) {
+                this.x = Math.random() * canvas.width;
+                this.y = initial ? Math.random() * canvas.height : -20;
+                this.size = Math.random() * 3 + 1;
+                this.speedY = Math.random() * 0.8 + 0.3;
+                this.speedX = Math.sin(Math.random() * Math.PI * 2) * 0.4;
+                this.color = goldColors[Math.floor(Math.random() * goldColors.length)];
+                this.opacity = Math.random() * 0.8 + 0.2;
+                this.twinkleSpeed = Math.random() * 0.03 + 0.01;
+                this.isStar = Math.random() > 0.4; // 60% chance to render as a 4-point sparkle star
+                this.angle = Math.random() * Math.PI;
+                this.spinSpeed = (Math.random() - 0.5) * 0.02;
+            }
+
+            update() {
+                this.y += this.speedY;
+                this.x += Math.sin(this.y * 0.01) * 0.3 + this.speedX;
+                this.angle += this.spinSpeed;
+
+                // Pulsating opacity for a flickering sparkle effect
+                this.opacity += Math.sin(Date.now() * this.twinkleSpeed) * 0.015;
+                if (this.opacity < 0.1) this.opacity = 0.1;
+                if (this.opacity > 1) this.opacity = 1;
+
+                // Reset particle when it floats off the bottom or sides
+                if (this.y > canvas.height + 20 || this.x < -20 || this.x > canvas.width + 20) {
+                    this.reset(false);
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = this.size * 2;
+                ctx.shadowColor = this.color;
+
+                if (this.isStar) {
+                    // Draw a 4-point glitter star
+                    ctx.beginPath();
+                    const outer = this.size * 2.2;
+                    const inner = this.size * 0.5;
+                    for (let i = 0; i < 4; i++) {
+                        ctx.lineTo(Math.cos((i * Math.PI) / 2) * outer, Math.sin((i * Math.PI) / 2) * outer);
+                        ctx.lineTo(Math.cos((i * Math.PI) / 2 + Math.PI / 4) * inner, Math.sin((i * Math.PI) / 2 + Math.PI / 4) * inner);
+                    }
+                    ctx.closePath();
+                    ctx.fill();
+                } else {
+                    // Draw a glowing round glitter particle
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateGlitter() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateGlitter);
+        }
+
+        animateGlitter();
     </script>
 </body>
 </html>

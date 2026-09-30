@@ -32,7 +32,7 @@
             overflow-x: hidden;
         }
 
-        /* --- FLOATING MUSIC TOGGLE BUTTON (🎵) --- */
+        /* --- FLOATING MUSIC TOGGLE BUTTON --- */
         #music-control {
             position: fixed;
             top: 20px;
@@ -68,38 +68,81 @@
             100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
         }
 
-        /* --- FRONT COVER SCREEN WITH YOUR IMAGE --- */
+        /* --- FRONT COVER SCREEN --- */
         #cover-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            /* Uses your uploaded image directly */
-            background: url('cover.png') center/cover no-repeat;
+            background: radial-gradient(circle, #800000 0%, #4a0005 100%);
             z-index: 9999;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-end;
-            padding-bottom: 12vh;
+            justify-content: center;
             transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s ease;
             overflow: hidden;
         }
 
-        /* Subtle Gold Frame Accent over the image */
-        .cover-frame {
+        .cover-border {
             position: absolute;
             top: 15px;
             bottom: 15px;
             left: 15px;
             right: 15px;
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            border-radius: 8px;
+            border: 2px solid var(--gold);
+            border-radius: 12px;
             pointer-events: none;
         }
 
-        /* Golden Pulsing OPEN Button */
+        .cover-content {
+            z-index: 2;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .monogram {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.8rem;
+            color: var(--gold-light);
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cover-subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            color: var(--gold-light);
+            letter-spacing: 2px;
+        }
+
+        .ganesha-frame {
+            width: 150px;
+            height: 150px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ganesha-svg {
+            width: 100px;
+            height: 100px;
+            fill: url(#gold-grad);
+        }
+
+        .god-blessing {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-light);
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+        }
+
         .open-btn {
             width: 85px;
             height: 85px;
@@ -109,40 +152,17 @@
             font-family: 'Cinzel', serif;
             font-weight: 700;
             font-size: 1rem;
-            letter-spacing: 1px;
-            border: 2px solid #FFFDF5;
+            border: 2px solid var(--gold-light);
             cursor: pointer;
-            box-shadow: 0 8px 25px rgba(180, 120, 20, 0.5), inset 0 0 8px rgba(255,255,255,0.8);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: pulse 2.2s infinite;
-            z-index: 2;
-        }
-
-        .open-btn:hover {
-            transform: scale(1.08);
-            box-shadow: 0 10px 30px rgba(180, 120, 20, 0.8);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+            margin-top: 20px;
+            animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
-            50% { transform: scale(1.06); box-shadow: 0 0 28px rgba(212, 175, 55, 0.85); }
-            100% { transform: scale(1); box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
-        }
-
-        /* Floating Sparkles */
-        .particle {
-            position: absolute;
-            background: radial-gradient(circle, #fff 20%, var(--gold) 100%);
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0;
-            animation: floatSparkle 6s infinite ease-in-out;
-        }
-
-        @keyframes floatSparkle {
-            0% { opacity: 0; transform: translateY(0) scale(0.5); }
-            50% { opacity: 0.8; transform: translateY(-80px) scale(1.2); }
-            100% { opacity: 0; transform: translateY(-160px) scale(0.3); }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+            100% { transform: scale(1); }
         }
 
         .cover-hidden {
@@ -192,13 +212,6 @@
             font-weight: 600;
             margin-top: 15px;
             border: 1px solid var(--gold);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            transition: all 0.3s ease;
-        }
-
-        .btn:hover {
-            background-color: var(--gold);
-            color: #000;
         }
 
         section { padding: 50px 20px; max-width: 850px; margin: 0 auto; }
@@ -211,7 +224,6 @@
             padding: 20px;
             text-align: left;
             box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-            border-radius: 0 8px 8px 0;
         }
 
         footer {
@@ -219,13 +231,12 @@
             color: #fff;
             padding: 40px 20px;
             border-top: 3px solid var(--gold);
-            font-size: 0.88rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- AUDIO ELEMENT -->
+    <!-- AUDIO ELEMENT WITH COMPATIBLE FILE SOURCES -->
     <audio id="bg-music" loop playsinline preload="auto">
         <source src="music.mp3" type="audio/mpeg">
         <source src="music.m4a" type="audio/mp4">
@@ -235,17 +246,39 @@
     <!-- FLOATING MUSIC BUTTON -->
     <button id="music-control" onclick="toggleMusic()" aria-label="Toggle Music">🎵</button>
 
-    <!-- FRONT COVER SCREEN WITH IMAGE -->
+    <svg width="0" height="0" style="position:absolute;">
+        <defs>
+            <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#bf953f" />
+                <stop offset="50%" stop-color="#b38728" />
+                <stop offset="100%" stop-color="#aa771c" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- FRONT COVER SCREEN -->
     <div id="cover-screen">
-        <div class="cover-frame"></div>
-        <div id="particle-container"></div>
-        <button class="open-btn" onclick="openInvitation()">OPEN</button>
+        <div class="cover-border"></div>
+        <div class="cover-content">
+            <div class="monogram">K & D</div>
+            <p class="cover-subtitle">And So, Our Journey Begins</p>
+
+            <div class="ganesha-frame">
+                <svg class="ganesha-svg" viewBox="0 0 24 24">
+                    <path d="M12,2A3,3 0 0,0 9,5C9,6.1 9.6,7.05 10.5,7.56C8.42,8.37 7,10.41 7,12.8C7,14.58 7.82,16.17 9.1,17.22C8.4,18.05 8,19.1 8,20.25A1.75,1.75 0 0,0 9.75,22H14.25A1.75,1.75 0 0,0 16,20.25C16,19.1 15.6,18.05 14.9,17.22C16.18,16.17 17,14.58 17,12.8C17,10.41 15.58,8.37 13.5,7.56C14.4,7.05 15,6.1 15,5A3,3 0 0,0 12,2M12,4A1,1 0 0,1 13,5A1,1 0 0,1 12,6A1,1 0 0,1 11,5A1,1 0 0,1 12,4M12,9A4,4 0 0,1 16,13C16,14.6 15.1,15.9 13.8,16.5C13.3,16.7 12.7,16.8 12,16.8C11.3,16.8 10.7,16.7 10.2,16.5C8.9,15.9 8,14.6 8,13A4,4 0 0,1 12,9Z"/>
+                </svg>
+            </div>
+
+            <div class="god-blessing">SRI KULADEVATHA PRASANNA</div>
+
+            <button class="open-btn" onclick="openInvitation()">OPEN</button>
+        </div>
     </div>
 
     <!-- MAIN INVITATION CONTENT -->
     <div id="main-invitation">
         <header>
-            <div style="color:var(--gold); font-weight:600; letter-spacing:1px;">WE ARE GETTING MARRIED</div>
+            <div style="color:var(--gold); font-weight:600;">WE ARE GETTING MARRIED</div>
             <h1 class="names">Kumaresh & Danamma</h1>
             <div class="date-banner">FRIDAY, DECEMBER 18, 2026</div>
             <a href="#schedule" class="btn">VIEW WEDDING TIMELINE</a>
@@ -275,10 +308,8 @@
 
         <footer>
             <p><strong>INVITED BY:</strong> Smt. Rukmeenibai @ Shankaralingappa Goudar</p>
-            <br>
             <p><strong>WITH BEST COMPLIMENTS FROM:</strong> Smt. Chaitra & Muralidhar Koppal</p>
-            <br>
-            <p style="color: var(--gold-light); font-size: 1.1rem; font-family: 'Cinzel', serif;">Kumaresh & Danamma</p>
+            <p style="color: var(--gold-light); font-size: 1.1rem; margin-top: 15px;">Kumaresh & Danamma</p>
         </footer>
     </div>
 
@@ -291,6 +322,7 @@
             document.getElementById('cover-screen').classList.add('cover-hidden');
             document.getElementById('main-invitation').classList.add('main-visible');
 
+            // Direct user action unlocks audio playback on mobile browsers
             startAudio();
         }
 
@@ -304,7 +336,7 @@
                     musicBtn.classList.add('music-playing');
                     musicBtn.textContent = '🎵';
                 }).catch(err => {
-                    console.log("Audio play blocked by browser policy:", err);
+                    console.log("Autoplay restriction error:", err);
                     isPlaying = false;
                     musicBtn.classList.remove('music-playing');
                     musicBtn.textContent = '🔇';
@@ -328,28 +360,6 @@
                 });
             }
         }
-
-        function createParticles() {
-            const container = document.getElementById('particle-container');
-            const particleCount = 20;
-
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                const size = Math.random() * 4 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${Math.random() * 100}vw`;
-                particle.style.top = `${Math.random() * 100}vh`;
-                particle.style.animationDelay = `${Math.random() * 5}s`;
-                particle.style.animationDuration = `${Math.random() * 4 + 4}s`;
-
-                container.appendChild(particle);
-            }
-        }
-
-        window.onload = createParticles;
     </script>
 </body>
 </html>

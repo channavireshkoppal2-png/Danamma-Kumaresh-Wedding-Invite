@@ -9,10 +9,11 @@
         :root {
             --primary-red: #6A050B;
             --dark-red: #4A0005;
+            --maroon-bg: #3B0004;
             --gold: #D4AF37;
             --gold-light: #F3E5AB;
             --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-            --bg-light: #FFFDF8;
+            --bg-cream: #FFFDF8;
             --text-dark: #333333;
             --card-bg: #FFFFFF;
         }
@@ -25,37 +26,52 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-light);
+            background-color: var(--maroon-bg);
             color: var(--text-dark);
             line-height: 1.6;
             text-align: center;
             overflow-x: hidden;
         }
 
+        /* --- NAVBAR --- */
+        nav {
+            background-color: var(--bg-cream);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            border-bottom: 1px solid var(--gold);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .logo {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--primary-red);
+            letter-spacing: 2px;
+        }
+
         /* --- FLOATING MUSIC TOGGLE BUTTON --- */
         #music-control {
             position: fixed;
-            top: 20px;
+            bottom: 20px;
             right: 20px;
             z-index: 10000;
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: rgba(255, 253, 248, 0.95);
-            backdrop-filter: blur(8px);
+            background: var(--bg-cream);
             border: 2px solid var(--gold);
-            box-shadow: 0 4px 15px rgba(180, 130, 40, 0.4);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             transition: all 0.3s ease;
-        }
-
-        #music-control:hover {
-            transform: scale(1.1);
-            background: #ffffff;
         }
 
         .music-playing {
@@ -68,79 +84,29 @@
             100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
         }
 
-        /* --- FRONT COVER SCREEN --- */
+        /* --- COVER SCREEN --- */
         #cover-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: radial-gradient(circle, #800000 0%, #4a0005 100%);
+            background: url('cover.png') center/cover no-repeat;
             z-index: 9999;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-end;
+            padding-bottom: 12vh;
             transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s ease;
-            overflow: hidden;
         }
 
-        .cover-border {
+        .cover-frame {
             position: absolute;
-            top: 15px;
-            bottom: 15px;
-            left: 15px;
-            right: 15px;
-            border: 2px solid var(--gold);
-            border-radius: 12px;
+            top: 15px; bottom: 15px; left: 15px; right: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            border-radius: 8px;
             pointer-events: none;
-        }
-
-        .cover-content {
-            z-index: 2;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .monogram {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3.8rem;
-            color: var(--gold-light);
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .cover-subtitle {
-            font-family: 'Cinzel', serif;
-            font-size: 0.95rem;
-            color: var(--gold-light);
-            letter-spacing: 2px;
-        }
-
-        .ganesha-frame {
-            width: 150px;
-            height: 150px;
-            margin: 10px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .ganesha-svg {
-            width: 100px;
-            height: 100px;
-            fill: url(#gold-grad);
-        }
-
-        .god-blessing {
-            font-family: 'Cinzel', serif;
-            color: var(--gold-light);
-            font-size: 0.85rem;
-            letter-spacing: 3px;
         }
 
         .open-btn {
@@ -152,17 +118,18 @@
             font-family: 'Cinzel', serif;
             font-weight: 700;
             font-size: 1rem;
-            border: 2px solid var(--gold-light);
+            letter-spacing: 1px;
+            border: 2px solid #FFFDF5;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
-            margin-top: 20px;
-            animation: pulse 2s infinite;
+            box-shadow: 0 8px 25px rgba(180, 120, 20, 0.5);
+            animation: pulse 2.2s infinite;
+            z-index: 2;
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.06); }
-            100% { transform: scale(1); }
+            0% { transform: scale(1); box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
+            50% { transform: scale(1.06); box-shadow: 0 0 28px rgba(212, 175, 55, 0.85); }
+            100% { transform: scale(1); box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
         }
 
         .cover-hidden {
@@ -171,147 +138,436 @@
             pointer-events: none;
         }
 
-        /* --- MAIN INVITATION CONTENT --- */
-        #main-invitation {
-            opacity: 0;
-            transition: opacity 1s ease 0.5s;
-        }
-
-        .main-visible {
-            opacity: 1 !important;
-        }
-
-        h1, h2, h3 { font-family: 'Cinzel', serif; }
-
-        header {
-            padding: 60px 20px;
-            background: linear-gradient(rgba(255, 253, 250, 0.92), rgba(255, 253, 250, 0.92)), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1000') center/cover;
+        /* --- HERO BANNER --- */
+        .hero {
+            background-color: var(--bg-cream);
+            padding: 50px 20px 40px;
             border-bottom: 2px solid var(--gold);
+            position: relative;
         }
 
-        .names {
-            font-size: 2.4rem;
+        .hero h2 {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 2px;
+            color: #8B6B23;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.2rem;
             color: var(--primary-red);
-            margin: 15px 0;
+            margin: 10px 0;
+            font-weight: normal;
         }
 
-        .date-banner {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--dark-red);
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 28px;
-            background-color: var(--primary-red);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 25px;
-            font-size: 0.85rem;
-            font-weight: 600;
+        .hero .date {
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            color: #555;
+            letter-spacing: 1px;
             margin-top: 15px;
+        }
+
+        .hero .sub-heading {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            color: #333;
+            margin: 25px 0 15px;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-outline {
+            display: inline-block;
+            padding: 10px 22px;
             border: 1px solid var(--gold);
+            background-color: #FFFDF8;
+            color: #333;
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            transition: all 0.3s;
         }
 
-        section { padding: 50px 20px; max-width: 850px; margin: 0 auto; }
-        .section-title { font-size: 1.7rem; color: var(--primary-red); }
-
-        .timeline-item {
-            background: var(--card-bg);
-            border-left: 4px solid var(--gold);
-            margin: 20px 0;
-            padding: 20px;
-            text-align: left;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-        }
-
-        footer {
-            background-color: #1a0002;
+        .btn-outline:hover {
+            background-color: var(--gold);
             color: #fff;
+        }
+
+        /* --- SECTION HEADINGS --- */
+        .section-header {
+            padding: 40px 20px 20px;
+        }
+
+        .section-header h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-light);
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+        }
+
+        .section-header p {
+            color: #E0D0B0;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            margin-top: 8px;
+        }
+
+        /* --- CARDS CONTAINER --- */
+        .card-container {
+            max-width: 480px;
+            margin: 0 auto 30px;
+            padding: 0 15px;
+        }
+
+        .card {
+            background-color: var(--bg-cream);
+            border: 1px solid var(--gold);
+            border-radius: 4px;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .card-img-full {
+            width: 100%;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .profile-img-circle {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+            margin: 0 auto 15px;
+        }
+
+        .card-subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            color: #8B6B23;
+            letter-spacing: 1.5px;
+        }
+
+        .card-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            color: var(--primary-red);
+            margin: 5px 0 10px;
+        }
+
+        .quote {
+            font-family: 'Cinzel', serif;
+            font-style: italic;
+            font-size: 0.8rem;
+            color: #555;
+            line-height: 1.6;
+            margin-top: 15px;
+            padding: 0 10px;
+        }
+
+        .dress-code-box {
+            background-color: #F8F5EC;
+            border: 1px solid #E2D8BF;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 15px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .color-dots {
+            display: flex;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .dot {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 1px solid #CCC;
+        }
+
+        .time-badge-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0 10px;
+            border-top: 1px solid #E0D5C0;
+            border-bottom: 1px solid #E0D5C0;
+            padding: 12px 0;
+        }
+
+        .time-badge h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            color: var(--primary-red);
+            letter-spacing: 1px;
+        }
+
+        .time-badge p {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #333;
+            margin-top: 4px;
+        }
+
+        /* --- FORM STYLING --- */
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            color: #444;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #D0C5AF;
+            border-radius: 4px;
+            font-family: inherit;
+            background-color: #FFF;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #260003;
+            color: #FFFDF8;
             padding: 40px 20px;
-            border-top: 3px solid var(--gold);
+            border-top: 2px solid var(--gold);
+        }
+
+        footer h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-light);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            font-size: 0.85rem;
+            color: #D3C3A5;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
 
-    <!-- AUDIO ELEMENT WITH COMPATIBLE FILE SOURCES -->
+    <!-- AUDIO ELEMENT -->
     <audio id="bg-music" loop playsinline preload="auto">
         <source src="music.mp3" type="audio/mpeg">
         <source src="music.m4a" type="audio/mp4">
-        <source src="music.ogg" type="audio/ogg">
     </audio>
 
-    <!-- FLOATING MUSIC BUTTON -->
+    <!-- FLOATING MUSIC CONTROL BUTTON -->
     <button id="music-control" onclick="toggleMusic()" aria-label="Toggle Music">🎵</button>
 
-    <svg width="0" height="0" style="position:absolute;">
-        <defs>
-            <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#bf953f" />
-                <stop offset="50%" stop-color="#b38728" />
-                <stop offset="100%" stop-color="#aa771c" />
-            </linearGradient>
-        </defs>
-    </svg>
-
-    <!-- FRONT COVER SCREEN -->
+    <!-- COVER SCREEN -->
     <div id="cover-screen">
-        <div class="cover-border"></div>
-        <div class="cover-content">
-            <div class="monogram">K & D</div>
-            <p class="cover-subtitle">And So, Our Journey Begins</p>
+        <div class="cover-frame"></div>
+        <button class="open-btn" onclick="openInvitation()">OPEN</button>
+    </div>
 
-            <div class="ganesha-frame">
-                <svg class="ganesha-svg" viewBox="0 0 24 24">
-                    <path d="M12,2A3,3 0 0,0 9,5C9,6.1 9.6,7.05 10.5,7.56C8.42,8.37 7,10.41 7,12.8C7,14.58 7.82,16.17 9.1,17.22C8.4,18.05 8,19.1 8,20.25A1.75,1.75 0 0,0 9.75,22H14.25A1.75,1.75 0 0,0 16,20.25C16,19.1 15.6,18.05 14.9,17.22C16.18,16.17 17,14.58 17,12.8C17,10.41 15.58,8.37 13.5,7.56C14.4,7.05 15,6.1 15,5A3,3 0 0,0 12,2M12,4A1,1 0 0,1 13,5A1,1 0 0,1 12,6A1,1 0 0,1 11,5A1,1 0 0,1 12,4M12,9A4,4 0 0,1 16,13C16,14.6 15.1,15.9 13.8,16.5C13.3,16.7 12.7,16.8 12,16.8C11.3,16.8 10.7,16.7 10.2,16.5C8.9,15.9 8,14.6 8,13A4,4 0 0,1 12,9Z"/>
-                </svg>
-            </div>
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">K & D</div>
+        <div style="font-size: 1.2rem; cursor: pointer; color: var(--primary-red);">☰</div>
+    </nav>
 
-            <div class="god-blessing">SRI KULADEVATHA PRASANNA</div>
+    <!-- MAIN HERO -->
+    <div class="hero">
+        <h2>WE ARE GETTING MARRIED</h2>
+        <h1>Kumaresh & Danamma</h1>
+        <div class="date">FRIDAY, DECEMBER 18, 2026</div>
+        <div class="sub-heading">OUR WEDDING HAS BEGUN!</div>
+        <a href="#schedule" class="btn-outline">VIEW WEDDING TIMELINE</a>
+    </div>
 
-            <button class="open-btn" onclick="openInvitation()">OPEN</button>
+    <!-- THE COUPLE SECTION -->
+    <div class="section-header">
+        <h2>THE COUPLE</h2>
+        <p>DIFFERENT STORIES, ONE BEAUTIFUL FOREVER</p>
+    </div>
+
+    <div class="card-container">
+        
+        <!-- GROOM CARD -->
+        <div class="card">
+            <img src="groom.jpg" alt="Kumaresh - Groom" class="profile-img-circle">
+            <div class="card-subtitle">THE GROOM</div>
+            <div class="card-title">Kumaresh</div>
+            <div class="quote">“ Dreaming of forever and grateful for every blessing that led to this moment ”</div>
         </div>
+
+        <!-- COUPLE IMAGE CARD 1 -->
+        <div class="card" style="padding: 15px;">
+            <img src="couple1.jpg" alt="Kumaresh and Danamma" class="card-img-full" style="margin-bottom:0;">
+        </div>
+
+        <!-- BRIDE CARD -->
+        <div class="card">
+            <img src="bride.jpg" alt="Danamma - Bride" class="profile-img-circle">
+            <div class="card-subtitle">THE BRIDE</div>
+            <div class="card-title">Danamma</div>
+            <div class="quote">“ Ready to begin a beautiful journey filled with love, laughter, and endless memories ”</div>
+        </div>
+
+        <!-- FUN HUMOR CARD -->
+        <div class="card">
+            <img src="couple2.jpg" alt="Kumaresh and Danamma" class="card-img-full">
+            <p style="font-family: 'Cinzel', serif; font-size: 0.8rem; color: #666;">No option left... I'm officially in the</p>
+            <h3 style="font-family: 'Great Vibes', cursive; font-size: 2rem; color: var(--primary-red); margin: 5px 0;">"Whatever my baby says"</h3>
+            <p style="font-family: 'Cinzel', serif; font-size: 0.8rem; color: #666; letter-spacing: 2px;">PHASE</p>
+            
+            <div style="background-color: #FAF6ED; border: 1px solid #EAE0C8; padding: 10px; margin-top: 15px; border-radius: 4px;">
+                <p style="font-family: 'Cinzel', serif; font-size: 0.65rem; color: #8B6B23; letter-spacing: 1px;">RELATIONSHIP RULE #1:</p>
+                <p style="font-family: 'Cinzel', serif; font-size: 0.85rem; font-weight: bold; color: #333;">BABY IS ALWAYS RIGHT</p>
+            </div>
+        </div>
+
     </div>
 
-    <!-- MAIN INVITATION CONTENT -->
-    <div id="main-invitation">
-        <header>
-            <div style="color:var(--gold); font-weight:600;">WE ARE GETTING MARRIED</div>
-            <h1 class="names">Kumaresh & Danamma</h1>
-            <div class="date-banner">FRIDAY, DECEMBER 18, 2026</div>
-            <a href="#schedule" class="btn">VIEW WEDDING TIMELINE</a>
-        </header>
-
-        <section id="schedule">
-            <h2 class="section-title">SCHEDULE OF EVENTS</h2>
-
-            <div class="timeline-item">
-                <div style="color:var(--primary-red); font-weight:700;">MONDAY, DECEMBER 14, 2026</div>
-                <h3>WEDDING CANOPY CEREMONY</h3>
-                <p><strong>Place:</strong> S K Goudar House</p>
-            </div>
-
-            <div class="timeline-item">
-                <div style="color:var(--primary-red); font-weight:700;">THURSDAY, DECEMBER 17, 2026</div>
-                <h3>HALDI CEREMONY & RECEPTION</h3>
-                <p><strong>Haldi:</strong> 9:00 AM | <strong>Reception:</strong> 6:00 PM</p>
-            </div>
-
-            <div class="timeline-item">
-                <div style="color:var(--primary-red); font-weight:700;">FRIDAY, DECEMBER 18, 2026</div>
-                <h3>MUHURTHAM & RECEPTION</h3>
-                <p><strong>Muhurtham:</strong> 9:44 AM | <strong>Reception:</strong> 12:26 PM</p>
-            </div>
-        </section>
-
-        <footer>
-            <p><strong>INVITED BY:</strong> Smt. Rukmeenibai @ Shankaralingappa Goudar</p>
-            <p><strong>WITH BEST COMPLIMENTS FROM:</strong> Smt. Chaitra & Muralidhar Koppal</p>
-            <p style="color: var(--gold-light); font-size: 1.1rem; margin-top: 15px;">Kumaresh & Danamma</p>
-        </footer>
+    <!-- SCHEDULE OF EVENTS SECTION -->
+    <div id="schedule" class="section-header">
+        <h2>SCHEDULE OF EVENTS</h2>
+        <p>WE LOOK FORWARD TO CELEBRATING EACH PRECIOUS MOMENT WITH YOU</p>
     </div>
+
+    <div class="card-container">
+
+        <!-- EVENT 1: WEDDING CANOPY -->
+        <div class="card">
+            <img src="canopy.jpg" alt="Wedding Canopy" class="card-img-full">
+            <div class="card-subtitle">DECEMBER 14, 2026 • MONDAY</div>
+            <h3 style="font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--primary-red); margin: 8px 0;">WEDDING CANOPY CEREMONY</h3>
+            <p style="font-size: 0.85rem; color: #555; margin-bottom: 10px;">⏰ 9:00 AM to 10:15 AM</p>
+            <p style="font-size: 0.85rem; color: #333;">📍 <strong>Place:</strong> S K Goudar House</p>
+            <a href="https://maps.google.com" target="_blank" class="btn-outline" style="margin-top: 15px;">VIEW DIRECTIONS 🗺️</a>
+        </div>
+
+        <!-- EVENT 2: BANGLES & MEHENDI -->
+        <div class="card">
+            <img src="mehendi.jpg" alt="Bangles & Mehendi" class="card-img-full">
+            <div class="card-subtitle">DECEMBER 16, 2026 • WEDNESDAY</div>
+            <h3 style="font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--primary-red); margin: 8px 0 4px;">BANGLES CEREMONY</h3>
+            <p style="font-size: 0.85rem; color: #555; margin-bottom: 12px;">⏰ 10:00 AM onwards</p>
+            
+            <hr style="border: 0; border-top: 1px dashed #D0C5AF; margin: 10px 0;">
+            
+            <h3 style="font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--primary-red); margin: 8px 0 4px;">MEHENDI CEREMONY</h3>
+            <p style="font-size: 0.85rem; color: #555;">⏰ Evening 5:00 PM</p>
+        </div>
+
+        <!-- EVENT 3: HALDI CEREMONY -->
+        <div class="card">
+            <img src="haldi.jpg" alt="Haldi Ceremony" class="card-img-full">
+            <div class="card-subtitle">DECEMBER 17, 2026 • THURSDAY</div>
+            <h3 style="font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--primary-red); margin: 8px 0;">HALDI CEREMONY</h3>
+            <p style="font-style: italic; font-size: 0.8rem; color: #666;">Where traditions shine in shades of white and yellow</p>
+
+            <div class="dress-code-box">
+                <span style="font-family: 'Cinzel', serif; font-size: 0.7rem; color: #8B6B23; letter-spacing: 1px;">🎁 DRESS CODE</span>
+                <span style="font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: bold; color: var(--primary-red);">WHITE & YELLOW</span>
+                <div class="color-dots">
+                    <div class="dot" style="background-color: #FFFFFF;"></div>
+                    <div class="dot" style="background-color: #FFD700;"></div>
+                </div>
+            </div>
+
+            <p style="font-size: 0.85rem; color: #555;">⏰ 9:00 AM onwards</p>
+            <p style="font-size: 0.85rem; color: #333; margin-top: 4px;">📍 <strong>Place:</strong> S K Goudar House</p>
+        </div>
+
+        <!-- EVENT 4: RECEPTION & SANGEET -->
+        <div class="card">
+            <img src="sangeet.jpg" alt="Sangeet Night" class="card-img-full">
+            <div class="card-subtitle">DECEMBER 17, 2026 • THURSDAY</div>
+            <h3 style="font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--primary-red); margin: 8px 0;">WEDDING RECEPTION & SANGEET NIGHT</h3>
+            <p style="font-size: 0.85rem; color: #555;">⏰ 6:00 PM onwards</p>
+        </div>
+
+        <!-- EVENT 5: MUHURTHAM & MAIN RECEPTION -->
+        <div class="card">
+            <img src="muhurtham.jpg" alt="Muhurtham & Reception" class="card-img-full">
+            <div class="card-subtitle">DECEMBER 18, 2026 • FRIDAY</div>
+            <h3 style="font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--primary-red); margin: 8px 0;">MUHURTHAM & RECEPTION</h3>
+            <p style="font-style: italic; font-size: 0.8rem; color: #666;">A sacred bond and divine celebration for a lifetime of love</p>
+
+            <div class="time-badge-container">
+                <div class="time-badge">
+                    <h4>MUHURTHAM</h4>
+                    <p>9:44 AM</p>
+                </div>
+                <div style="border-right: 1px solid #E0D5C0;"></div>
+                <div class="time-badge">
+                    <h4>RECEPTION</h4>
+                    <p>12:26 PM</p>
+                </div>
+            </div>
+
+            <p style="font-family: 'Cinzel', serif; font-size: 0.75rem; color: #8B6B23; margin-top: 15px;">VENUE</p>
+            <p style="font-size: 0.85rem; font-weight: 600; color: #333; margin: 4px 0 15px;">KBJNL SAMUDHAYA BHAVANA<br><span style="font-weight: normal; font-size: 0.8rem; color: #555;">STATE BANK OPPOSITE, ALAMATTI D S, VIJAYAPUR, Nidagundi, Aalamatti, Karnataka 586201</span></p>
+
+            <a href="https://maps.google.com" target="_blank" class="btn-outline">VIEW DIRECTIONS 🗺️</a>
+        </div>
+
+        <!-- BLESSINGS & RSVP FORM -->
+        <div class="card">
+            <div class="card-subtitle">NOTE FOR FOREVER</div>
+            <h3 style="font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--primary-red); margin: 8px 0 20px;">LEAVE YOUR BLESSINGS</h3>
+
+            <form onsubmit="event.preventDefault(); alert('Thank you for your blessings!');">
+                <div class="form-group">
+                    <label>YOUR NAME</label>
+                    <input type="text" class="form-control" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label>YOUR MESSAGE</label>
+                    <textarea class="form-control" rows="4" placeholder="Write your warm wishes..." required></textarea>
+                </div>
+                <button type="submit" class="btn-outline" style="width: 100%; margin-top: 10px; cursor: pointer;">SEND PRIVATE WISHES</button>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- FOOTER INVITATION DETAILS -->
+    <footer>
+        <div style="max-width: 480px; margin: 0 auto;">
+            <h3>WITH LOVE AND WARM REGARDS</h3>
+            <p style="font-family: 'Cinzel', serif; font-weight: bold; color: var(--gold-light); margin-top: 15px; letter-spacing: 1px;">INVITED BY</p>
+            <p>SMT. RUKMEENIBAI @ SHANKARALINGAPPA GOUDAR</p>
+
+            <p style="font-family: 'Cinzel', serif; font-weight: bold; color: var(--gold-light); margin-top: 20px; letter-spacing: 1px;">WITH BEST COMPLIMENTS FROM</p>
+            <p>SMT. CHAITRA & MURALIDHAR KOPPAL</p>
+
+            <hr style="border: 0; border-top: 1px solid rgba(212, 175, 55, 0.3); margin: 25px 0;">
+
+            <p style="font-size: 0.8rem; font-style: italic; color: #E0D0B0;">"Together with our families, we eagerly await your presence as we celebrate this joyous occasion and become one family."</p>
+
+            <h2 style="font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: var(--gold-light); font-weight: normal; margin: 15px 0 5px;">Kumaresh & Danamma</h2>
+
+            <p style="font-family: 'Cinzel', serif; font-size: 0.75rem; color: var(--gold); letter-spacing: 1px;">“YOUR PRESENCE AND BLESSINGS ARE THE ONLY GIFT WE’RE HOPING UNWRAP.”</p>
+        </div>
+    </footer>
 
     <script>
         const audio = document.getElementById('bg-music');
@@ -320,9 +576,6 @@
 
         function openInvitation() {
             document.getElementById('cover-screen').classList.add('cover-hidden');
-            document.getElementById('main-invitation').classList.add('main-visible');
-
-            // Direct user action unlocks audio playback on mobile browsers
             startAudio();
         }
 
@@ -336,7 +589,7 @@
                     musicBtn.classList.add('music-playing');
                     musicBtn.textContent = '🎵';
                 }).catch(err => {
-                    console.log("Autoplay restriction error:", err);
+                    console.log("Audio play blocked by browser:", err);
                     isPlaying = false;
                     musicBtn.classList.remove('music-playing');
                     musicBtn.textContent = '🔇';

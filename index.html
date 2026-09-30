@@ -32,30 +32,29 @@
             overflow-x: hidden;
         }
 
-        /* --- AESTHETIC MUSIC TOGGLE BUTTON (🎵) --- */
+        /* --- FLOATING MUSIC TOGGLE BUTTON (🎵) --- */
         #music-control {
             position: fixed;
             top: 20px;
             right: 20px;
             z-index: 10000;
-            width: 48px;
-            height: 48px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            background: rgba(255, 253, 248, 0.9);
+            background: rgba(255, 253, 248, 0.95);
             backdrop-filter: blur(8px);
-            border: 1.5px solid var(--gold);
-            box-shadow: 0 4px 15px rgba(180, 130, 40, 0.35);
+            border: 2px solid var(--gold);
+            box-shadow: 0 4px 15px rgba(180, 130, 40, 0.4);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             transition: all 0.3s ease;
         }
 
         #music-control:hover {
             transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
             background: #ffffff;
         }
 
@@ -65,122 +64,72 @@
 
         @keyframes musicPulse {
             0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6); }
-            70% { box-shadow: 0 0 0 12px rgba(212, 175, 55, 0); }
+            70% { box-shadow: 0 0 0 14px rgba(212, 175, 55, 0); }
             100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
         }
 
-        /* --- ORIGINAL FRONT COVER SCREEN --- */
+        /* --- FRONT COVER SCREEN WITH YOUR IMAGE --- */
         #cover-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: radial-gradient(circle, #800000 0%, #4a0005 100%);
+            /* Uses your uploaded image directly */
+            background: url('cover.png') center/cover no-repeat;
             z-index: 9999;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-end;
+            padding-bottom: 12vh;
             transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s ease;
-            box-shadow: inset 0 0 100px rgba(0,0,0,0.8);
             overflow: hidden;
         }
 
-        .cover-border {
+        /* Subtle Gold Frame Accent over the image */
+        .cover-frame {
             position: absolute;
             top: 15px;
             bottom: 15px;
             left: 15px;
             right: 15px;
-            border: 2px solid var(--gold);
-            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            border-radius: 8px;
             pointer-events: none;
-            box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.3);
         }
 
-        .cover-content {
-            z-index: 2;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .monogram {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem;
-            color: var(--gold-light);
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-
-        .cover-subtitle {
-            font-family: 'Cinzel', serif;
-            font-size: 0.95rem;
-            color: var(--gold-light);
-            letter-spacing: 2px;
-            font-style: italic;
-        }
-
-        .ganesha-frame {
-            width: 170px;
-            height: 170px;
-            margin: 10px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, rgba(0,0,0,0) 70%);
-            border-radius: 50%;
-        }
-
-        .ganesha-svg {
-            width: 110px;
-            height: 110px;
-            fill: url(#gold-grad);
-            filter: drop-shadow(0px 2px 5px rgba(0,0,0,0.6));
-        }
-
-        .god-blessing {
-            font-family: 'Cinzel', serif;
-            color: var(--gold-light);
-            font-size: 0.85rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
+        /* Golden Pulsing OPEN Button */
         .open-btn {
-            width: 80px;
-            height: 80px;
+            width: 85px;
+            height: 85px;
             border-radius: 50%;
             background: var(--gold-gradient);
             color: var(--dark-red);
             font-family: 'Cinzel', serif;
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 1rem;
             letter-spacing: 1px;
-            border: 2px solid var(--gold-light);
+            border: 2px solid #FFFDF5;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6), inset 0 0 5px rgba(255,255,255,0.8);
-            margin-top: 20px;
+            box-shadow: 0 8px 25px rgba(180, 120, 20, 0.5), inset 0 0 8px rgba(255,255,255,0.8);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: pulse 2s infinite;
+            animation: pulse 2.2s infinite;
+            z-index: 2;
         }
 
         .open-btn:hover {
             transform: scale(1.08);
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.9);
+            box-shadow: 0 10px 30px rgba(180, 120, 20, 0.8);
         }
 
         @keyframes pulse {
             0% { transform: scale(1); box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
-            50% { transform: scale(1.06); box-shadow: 0 0 25px rgba(212, 175, 55, 0.8); }
+            50% { transform: scale(1.06); box-shadow: 0 0 28px rgba(212, 175, 55, 0.85); }
             100% { transform: scale(1); box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
         }
 
+        /* Floating Sparkles */
         .particle {
             position: absolute;
             background: radial-gradient(circle, #fff 20%, var(--gold) 100%);
@@ -202,7 +151,7 @@
             pointer-events: none;
         }
 
-        /* --- MAIN CONTENT STYLES --- */
+        /* --- MAIN INVITATION CONTENT --- */
         #main-invitation {
             opacity: 0;
             transition: opacity 1s ease 0.5s;
@@ -212,23 +161,12 @@
             opacity: 1 !important;
         }
 
-        h1, h2, h3, .serif {
-            font-family: 'Cinzel', serif;
-            letter-spacing: 1px;
-        }
+        h1, h2, h3 { font-family: 'Cinzel', serif; }
 
         header {
             padding: 60px 20px;
             background: linear-gradient(rgba(255, 253, 250, 0.92), rgba(255, 253, 250, 0.92)), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1000') center/cover;
             border-bottom: 2px solid var(--gold);
-        }
-
-        .header-title {
-            font-size: 1rem;
-            text-transform: uppercase;
-            color: var(--gold);
-            font-weight: 600;
-            margin-bottom: 10px;
         }
 
         .names {
@@ -241,7 +179,6 @@
             font-size: 1.1rem;
             font-weight: 600;
             color: var(--dark-red);
-            margin-bottom: 20px;
         }
 
         .btn {
@@ -253,7 +190,6 @@
             border-radius: 25px;
             font-size: 0.85rem;
             font-weight: 600;
-            letter-spacing: 1px;
             margin-top: 15px;
             border: 1px solid var(--gold);
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
@@ -265,72 +201,8 @@
             color: #000;
         }
 
-        section {
-            padding: 50px 20px;
-            max-width: 850px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 1.7rem;
-            color: var(--primary-red);
-            margin-bottom: 8px;
-        }
-
-        .section-subtitle {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 25px;
-            font-style: italic;
-        }
-
-        .couple-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
-            margin-top: 20px;
-        }
-
-        .profile-card {
-            background: var(--card-bg);
-            border: 1px solid #f0e6d2;
-            padding: 20px;
-            border-radius: 8px;
-            flex: 1 1 280px;
-            max-width: 360px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .profile-img {
-            width: 100%;
-            height: 280px;
-            object-fit: cover;
-            border-radius: 6px;
-            margin-bottom: 15px;
-            background-color: #eee;
-        }
-
-        .quote {
-            font-size: 0.88rem;
-            color: #555;
-            font-style: italic;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        .gallery-item {
-            width: 100%;
-            height: 130px;
-            object-fit: cover;
-            border-radius: 6px;
-            background-color: #eee;
-        }
+        section { padding: 50px 20px; max-width: 850px; margin: 0 auto; }
+        .section-title { font-size: 1.7rem; color: var(--primary-red); }
 
         .timeline-item {
             background: var(--card-bg);
@@ -338,80 +210,16 @@
             margin: 20px 0;
             padding: 20px;
             text-align: left;
-            border-radius: 0 8px 8px 0;
             box-shadow: 0 2px 10px rgba(0,0,0,0.04);
-        }
-
-        .timeline-date {
-            font-weight: 700;
-            color: var(--primary-red);
-            font-size: 1rem;
-        }
-
-        .timeline-time {
-            color: var(--gold);
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .timeline-title {
-            font-size: 1.15rem;
-            margin: 6px 0;
-        }
-
-        .muhurtham-flex {
-            display: flex;
-            justify-content: space-around;
-            background: #fff8f0;
-            padding: 15px;
-            border-radius: 6px;
-            margin-top: 15px;
-            border: 1px solid #f0e0d0;
-        }
-
-        .muhurtham-box h4 {
-            color: var(--primary-red);
-            font-size: 0.95rem;
-        }
-
-        .venue-card {
-            background: var(--card-bg);
-            padding: 30px 20px;
-            border-radius: 8px;
-            border: 1px solid var(--gold);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .wishes-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            max-width: 450px;
-            margin: 20px auto 0 auto;
-        }
-
-        .wishes-form input, .wishes-form textarea {
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-family: inherit;
-            font-size: 0.9rem;
+            border-radius: 0 8px 8px 0;
         }
 
         footer {
             background-color: #1a0002;
             color: #fff;
             padding: 40px 20px;
-            font-size: 0.88rem;
             border-top: 3px solid var(--gold);
-        }
-
-        hr {
-            border: 0;
-            height: 1px;
-            background: linear-gradient(to right, transparent, var(--gold), transparent);
-            margin: 30px auto;
-            width: 70%;
+            font-size: 0.88rem;
         }
     </style>
 </head>
@@ -420,204 +228,83 @@
     <!-- AUDIO ELEMENT -->
     <audio id="bg-music" loop playsinline preload="auto">
         <source src="music.mp3" type="audio/mpeg">
+        <source src="music.m4a" type="audio/mp4">
+        <source src="music.ogg" type="audio/ogg">
     </audio>
 
-    <!-- FLOATING MUSIC TOGGLE BUTTON (🎵 ICON) -->
+    <!-- FLOATING MUSIC BUTTON -->
     <button id="music-control" onclick="toggleMusic()" aria-label="Toggle Music">🎵</button>
 
-    <!-- SVG DEFINITIONS FOR GOLD GRADIENT -->
-    <svg width="0" height="0" style="position:absolute;">
-        <defs>
-            <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#bf953f" />
-                <stop offset="25%" stop-color="#fcf6ba" />
-                <stop offset="50%" stop-color="#b38728" />
-                <stop offset="75%" stop-color="#fbf5b7" />
-                <stop offset="100%" stop-color="#aa771c" />
-            </linearGradient>
-        </defs>
-    </svg>
-
-    <!-- ORIGINAL FRONT COVER SCREEN -->
+    <!-- FRONT COVER SCREEN WITH IMAGE -->
     <div id="cover-screen">
-        <div class="cover-border"></div>
+        <div class="cover-frame"></div>
         <div id="particle-container"></div>
-
-        <div class="cover-content">
-            <div class="monogram">K & D</div>
-            <p class="cover-subtitle">And So, Our Journey Begins</p>
-
-            <div class="ganesha-frame">
-                <svg class="ganesha-svg" viewBox="0 0 24 24">
-                    <path d="M12,2A3,3 0 0,0 9,5C9,6.1 9.6,7.05 10.5,7.56C8.42,8.37 7,10.41 7,12.8C7,14.58 7.82,16.17 9.1,17.22C8.4,18.05 8,19.1 8,20.25A1.75,1.75 0 0,0 9.75,22H14.25A1.75,1.75 0 0,0 16,20.25C16,19.1 15.6,18.05 14.9,17.22C16.18,16.17 17,14.58 17,12.8C17,10.41 15.58,8.37 13.5,7.56C14.4,7.05 15,6.1 15,5A3,3 0 0,0 12,2M12,4A1,1 0 0,1 13,5A1,1 0 0,1 12,6A1,1 0 0,1 11,5A1,1 0 0,1 12,4M12,9A4,4 0 0,1 16,13C16,14.6 15.1,15.9 13.8,16.5C13.3,16.7 12.7,16.8 12,16.8C11.3,16.8 10.7,16.7 10.2,16.5C8.9,15.9 8,14.6 8,13A4,4 0 0,1 12,9Z"/>
-                </svg>
-            </div>
-
-            <div class="god-blessing">SRI KULADEVATHA PRASANNA</div>
-
-            <button class="open-btn" onclick="openInvitation()">OPEN</button>
-        </div>
+        <button class="open-btn" onclick="openInvitation()">OPEN</button>
     </div>
 
     <!-- MAIN INVITATION CONTENT -->
     <div id="main-invitation">
         <header>
-            <div class="header-title">We Are Getting Married</div>
+            <div style="color:var(--gold); font-weight:600; letter-spacing:1px;">WE ARE GETTING MARRIED</div>
             <h1 class="names">Kumaresh & Danamma</h1>
             <div class="date-banner">FRIDAY, DECEMBER 18, 2026</div>
-            <p>OUR WEDDING HAS BEGUN!</p>
             <a href="#schedule" class="btn">VIEW WEDDING TIMELINE</a>
         </header>
 
-        <section id="couple">
-            <h2 class="section-title">THE COUPLE</h2>
-            <p class="section-subtitle">Different Stories, One Beautiful Forever</p>
-            
-            <div class="couple-container">
-                <div class="profile-card">
-                    <img src="https://via.placeholder.com/350x400?text=Groom+Photo" alt="Groom" class="profile-img">
-                    <h3>KUMARESH</h3>
-                    <p class="quote">“Dreaming of forever and grateful for every blessing that led to this moment.”</p>
-                </div>
-                <div class="profile-card">
-                    <img src="https://via.placeholder.com/350x400?text=Bride+Photo" alt="Bride" class="profile-img">
-                    <h3>DANAMMA</h3>
-                    <p class="quote">“Ready to begin a beautiful journey filled with love, laughter, and endless memories.”</p>
-                </div>
-            </div>
-        </section>
-
-        <hr>
-
-        <section id="gallery">
-            <h2 class="section-title">CHERISHED MOMENTS</h2>
-            <p class="section-subtitle">A glimpse into our beautiful journey together</p>
-            
-            <div class="gallery-grid">
-                <img src="https://via.placeholder.com/200" alt="Moment 1" class="gallery-item">
-                <img src="https://via.placeholder.com/200" alt="Moment 2" class="gallery-item">
-                <img src="https://via.placeholder.com/200" alt="Moment 3" class="gallery-item">
-                <img src="https://via.placeholder.com/200" alt="Moment 4" class="gallery-item">
-                <img src="https://via.placeholder.com/200" alt="Moment 5" class="gallery-item">
-                <img src="https://via.placeholder.com/200" alt="Moment 6" class="gallery-item">
-            </div>
-        </section>
-
-        <hr>
-
         <section id="schedule">
             <h2 class="section-title">SCHEDULE OF EVENTS</h2>
-            <p class="section-subtitle">We look forward to celebrating each precious moment with you</p>
 
             <div class="timeline-item">
-                <div class="timeline-date">MONDAY, DECEMBER 14, 2026</div>
-                <div class="timeline-time">9:00 AM – 10:15 AM</div>
-                <h3 class="timeline-title">WEDDING CANOPY CEREMONY</h3>
+                <div style="color:var(--primary-red); font-weight:700;">MONDAY, DECEMBER 14, 2026</div>
+                <h3>WEDDING CANOPY CEREMONY</h3>
                 <p><strong>Place:</strong> S K Goudar House</p>
             </div>
 
             <div class="timeline-item">
-                <div class="timeline-date">WEDNESDAY, DECEMBER 16, 2026</div>
-                <div class="timeline-time">10:00 AM Onwards</div>
-                <h3 class="timeline-title">BANGLES CEREMONY</h3>
-                <br>
-                <div class="timeline-time">5:00 PM Onwards</div>
-                <h3 class="timeline-title">MEHENDI CEREMONY</h3>
+                <div style="color:var(--primary-red); font-weight:700;">THURSDAY, DECEMBER 17, 2026</div>
+                <h3>HALDI CEREMONY & RECEPTION</h3>
+                <p><strong>Haldi:</strong> 9:00 AM | <strong>Reception:</strong> 6:00 PM</p>
             </div>
 
             <div class="timeline-item">
-                <div class="timeline-date">THURSDAY, DECEMBER 17, 2026</div>
-                <div class="timeline-time">9:00 AM Onwards</div>
-                <h3 class="timeline-title">HALDI CEREMONY</h3>
-                <p><em>Where traditions shine in shades of white and yellow.</em></p>
-                <p><strong>Place:</strong> S K Goudar House</p>
-                <p><strong>Dress Code:</strong> White & Yellow</p>
-                <br>
-                <div class="timeline-time">6:00 PM Onwards</div>
-                <h3 class="timeline-title">WEDDING RECEPTION & SANGEET NIGHT</h3>
+                <div style="color:var(--primary-red); font-weight:700;">FRIDAY, DECEMBER 18, 2026</div>
+                <h3>MUHURTHAM & RECEPTION</h3>
+                <p><strong>Muhurtham:</strong> 9:44 AM | <strong>Reception:</strong> 12:26 PM</p>
             </div>
-
-            <div class="timeline-item">
-                <div class="timeline-date">FRIDAY, DECEMBER 18, 2026</div>
-                <h3 class="timeline-title">MUHURTHAM & RECEPTION</h3>
-                <p>A sacred bond and divine celebration for a lifetime of love.</p>
-                
-                <div class="muhurtham-flex">
-                    <div class="muhurtham-box">
-                        <h4>MUHURTHAM</h4>
-                        <p>9:44 AM</p>
-                    </div>
-                    <div class="muhurtham-box">
-                        <h4>RECEPTION</h4>
-                        <p>12:26 PM</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <hr>
-
-        <section id="venue">
-            <h2 class="section-title">VENUE</h2>
-            <div class="venue-card">
-                <h3>KBJNL SAMUDHAYA BHAVANA</h3>
-                <p>Opposite State Bank, Alamatti D S</p>
-                <p>Vijayapur, Nidagundi, Aalamatti, Karnataka - 586201</p>
-                <a href="https://maps.google.com" target="_blank" class="btn">VIEW DIRECTIONS</a>
-            </div>
-        </section>
-
-        <section id="wishes">
-            <h2 class="section-title">LEAVE YOUR BLESSINGS</h2>
-            <p class="section-subtitle">Your presence and blessings are the only gift we’re hoping to unwrap.</p>
-            
-            <form class="wishes-form" onsubmit="alert('Thank you for your blessings!'); return false;">
-                <input type="text" placeholder="YOUR NAME" required>
-                <textarea rows="4" placeholder="YOUR MESSAGE" required></textarea>
-                <button type="submit" class="btn">SEND PRIVATE WISHES</button>
-            </form>
         </section>
 
         <footer>
-            <p><strong>INVITED BY:</strong></p>
-            <p>Smt. Rukmeenibai @ Shankaralingappa Goudar</p>
+            <p><strong>INVITED BY:</strong> Smt. Rukmeenibai @ Shankaralingappa Goudar</p>
             <br>
-            <p><strong>WITH BEST COMPLIMENTS FROM:</strong></p>
-            <p>Smt. Chaitra & Muralidhar Koppal</p>
-            <br>
-            <p>Together with our families, we eagerly await your presence as we celebrate this joyous occasion.</p>
+            <p><strong>WITH BEST COMPLIMENTS FROM:</strong> Smt. Chaitra & Muralidhar Koppal</p>
             <br>
             <p style="color: var(--gold-light); font-size: 1.1rem; font-family: 'Cinzel', serif;">Kumaresh & Danamma</p>
         </footer>
     </div>
 
-    <!-- JAVASCRIPT FOR AUDIO, ANIMATIONS AND COVER OPENING -->
     <script>
         const audio = document.getElementById('bg-music');
         const musicBtn = document.getElementById('music-control');
         let isPlaying = false;
 
         function openInvitation() {
-            const cover = document.getElementById('cover-screen');
-            const main = document.getElementById('main-invitation');
-            
-            cover.classList.add('cover-hidden');
-            main.classList.add('main-visible');
+            document.getElementById('cover-screen').classList.add('cover-hidden');
+            document.getElementById('main-invitation').classList.add('main-visible');
 
-            playAudio();
+            startAudio();
         }
 
-        function playAudio() {
+        function startAudio() {
             audio.currentTime = 0;
-            const playPromise = audio.play();
+            let playPromise = audio.play();
 
             if (playPromise !== undefined) {
                 playPromise.then(() => {
                     isPlaying = true;
                     musicBtn.classList.add('music-playing');
                     musicBtn.textContent = '🎵';
-                }).catch(error => {
-                    console.log("Audio play blocked by browser:", error);
+                }).catch(err => {
+                    console.log("Audio play blocked by browser policy:", err);
                     isPlaying = false;
                     musicBtn.classList.remove('music-playing');
                     musicBtn.textContent = '🔇';
@@ -637,7 +324,7 @@
                     musicBtn.classList.add('music-playing');
                     musicBtn.textContent = '🎵';
                 }).catch(err => {
-                    console.log("Playback error:", err);
+                    console.log("Audio toggle error:", err);
                 });
             }
         }

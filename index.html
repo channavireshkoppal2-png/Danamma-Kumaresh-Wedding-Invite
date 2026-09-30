@@ -32,7 +32,7 @@
             overflow-x: hidden;
         }
 
-        /* --- AESTHETIC FLOATING MUSIC CONTROL BUTTON --- */
+        /* --- AESTHETIC MUSIC TOGGLE BUTTON (🎵) --- */
         #music-control {
             position: fixed;
             top: 20px;
@@ -41,63 +41,120 @@
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            background: rgba(255, 253, 248, 0.85);
+            background: rgba(255, 253, 248, 0.9);
             backdrop-filter: blur(8px);
             border: 1.5px solid var(--gold);
-            box-shadow: 0 4px 20px rgba(180, 130, 40, 0.3);
+            box-shadow: 0 4px 15px rgba(180, 130, 40, 0.35);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        #music-control svg {
-            width: 20px;
-            height: 20px;
-            fill: var(--primary-red);
-            transition: transform 0.3s ease;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
         }
 
         #music-control:hover {
-            transform: scale(1.12);
-            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.5);
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
             background: #ffffff;
         }
 
-        /* Music Pulse Animation when active */
         .music-playing {
-            animation: musicGlow 2s infinite ease-in-out;
+            animation: musicPulse 2s infinite ease-in-out;
         }
 
-        @keyframes musicGlow {
+        @keyframes musicPulse {
             0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6); }
             70% { box-shadow: 0 0 0 12px rgba(212, 175, 55, 0); }
             100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
         }
 
-        /* --- COVER SCREEN WITH YOUR IMAGE --- */
+        /* --- ORIGINAL FRONT COVER SCREEN --- */
         #cover-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: url('cover.png') center/cover no-repeat;
+            background: radial-gradient(circle, #800000 0%, #4a0005 100%);
             z-index: 9999;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-end;
-            padding-bottom: 8vh;
+            justify-content: center;
             transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s ease;
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.8);
             overflow: hidden;
         }
 
-        /* Circular Gold Open Button */
+        .cover-border {
+            position: absolute;
+            top: 15px;
+            bottom: 15px;
+            left: 15px;
+            right: 15px;
+            border: 2px solid var(--gold);
+            border-radius: 12px;
+            pointer-events: none;
+            box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .cover-content {
+            z-index: 2;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .monogram {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--gold-light);
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .cover-subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            color: var(--gold-light);
+            letter-spacing: 2px;
+            font-style: italic;
+        }
+
+        .ganesha-frame {
+            width: 170px;
+            height: 170px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+        }
+
+        .ganesha-svg {
+            width: 110px;
+            height: 110px;
+            fill: url(#gold-grad);
+            filter: drop-shadow(0px 2px 5px rgba(0,0,0,0.6));
+        }
+
+        .god-blessing {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-light);
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
         .open-btn {
-            width: 82px;
-            height: 82px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             background: var(--gold-gradient);
             color: var(--dark-red);
@@ -105,26 +162,25 @@
             font-weight: 700;
             font-size: 0.95rem;
             letter-spacing: 1px;
-            border: 2px solid #FFFDF5;
+            border: 2px solid var(--gold-light);
             cursor: pointer;
-            box-shadow: 0 8px 25px rgba(180, 120, 20, 0.5), inset 0 0 8px rgba(255,255,255,0.8);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6), inset 0 0 5px rgba(255,255,255,0.8);
+            margin-top: 20px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: pulse 2.2s infinite;
-            z-index: 2;
+            animation: pulse 2s infinite;
         }
 
         .open-btn:hover {
             transform: scale(1.08);
-            box-shadow: 0 10px 30px rgba(180, 120, 20, 0.8);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.9);
         }
 
         @keyframes pulse {
             0% { transform: scale(1); box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
-            50% { transform: scale(1.06); box-shadow: 0 0 28px rgba(212, 175, 55, 0.85); }
+            50% { transform: scale(1.06); box-shadow: 0 0 25px rgba(212, 175, 55, 0.8); }
             100% { transform: scale(1); box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
         }
 
-        /* Floating Glitter Sparkles */
         .particle {
             position: absolute;
             background: radial-gradient(circle, #fff 20%, var(--gold) 100%);
@@ -136,11 +192,10 @@
 
         @keyframes floatSparkle {
             0% { opacity: 0; transform: translateY(0) scale(0.5); }
-            50% { opacity: 0.85; transform: translateY(-80px) scale(1.2); }
+            50% { opacity: 0.8; transform: translateY(-80px) scale(1.2); }
             100% { opacity: 0; transform: translateY(-160px) scale(0.3); }
         }
 
-        /* Hide Cover Class */
         .cover-hidden {
             transform: translateY(-100vh);
             opacity: 0;
@@ -363,25 +418,45 @@
 <body>
 
     <!-- AUDIO ELEMENT -->
-    <audio id="bg-music" loop preload="auto">
+    <audio id="bg-music" loop playsinline preload="auto">
         <source src="music.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- AESTHETIC FLOATING MUSIC TOGGLE BUTTON -->
-    <button id="music-control" onclick="toggleMusic()" aria-label="Toggle Music">
-        <!-- Minimalist Musical Note SVG Icon -->
-        <svg id="music-icon" viewBox="0 0 24 24">
-            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
-        </svg>
-    </button>
+    <!-- FLOATING MUSIC TOGGLE BUTTON (🎵 ICON) -->
+    <button id="music-control" onclick="toggleMusic()" aria-label="Toggle Music">🎵</button>
 
-    <!-- FIRST PAGE / OPENING COVER SCREEN -->
+    <!-- SVG DEFINITIONS FOR GOLD GRADIENT -->
+    <svg width="0" height="0" style="position:absolute;">
+        <defs>
+            <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#bf953f" />
+                <stop offset="25%" stop-color="#fcf6ba" />
+                <stop offset="50%" stop-color="#b38728" />
+                <stop offset="75%" stop-color="#fbf5b7" />
+                <stop offset="100%" stop-color="#aa771c" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- ORIGINAL FRONT COVER SCREEN -->
     <div id="cover-screen">
-        <!-- Floating Particles Generator -->
+        <div class="cover-border"></div>
         <div id="particle-container"></div>
 
-        <!-- Open Button overlay on the bottom mandala -->
-        <button class="open-btn" onclick="openInvitation()">OPEN</button>
+        <div class="cover-content">
+            <div class="monogram">K & D</div>
+            <p class="cover-subtitle">And So, Our Journey Begins</p>
+
+            <div class="ganesha-frame">
+                <svg class="ganesha-svg" viewBox="0 0 24 24">
+                    <path d="M12,2A3,3 0 0,0 9,5C9,6.1 9.6,7.05 10.5,7.56C8.42,8.37 7,10.41 7,12.8C7,14.58 7.82,16.17 9.1,17.22C8.4,18.05 8,19.1 8,20.25A1.75,1.75 0 0,0 9.75,22H14.25A1.75,1.75 0 0,0 16,20.25C16,19.1 15.6,18.05 14.9,17.22C16.18,16.17 17,14.58 17,12.8C17,10.41 15.58,8.37 13.5,7.56C14.4,7.05 15,6.1 15,5A3,3 0 0,0 12,2M12,4A1,1 0 0,1 13,5A1,1 0 0,1 12,6A1,1 0 0,1 11,5A1,1 0 0,1 12,4M12,9A4,4 0 0,1 16,13C16,14.6 15.1,15.9 13.8,16.5C13.3,16.7 12.7,16.8 12,16.8C11.3,16.8 10.7,16.7 10.2,16.5C8.9,15.9 8,14.6 8,13A4,4 0 0,1 12,9Z"/>
+                </svg>
+            </div>
+
+            <div class="god-blessing">SRI KULADEVATHA PRASANNA</div>
+
+            <button class="open-btn" onclick="openInvitation()">OPEN</button>
+        </div>
     </div>
 
     <!-- MAIN INVITATION CONTENT -->
@@ -520,10 +595,8 @@
     <script>
         const audio = document.getElementById('bg-music');
         const musicBtn = document.getElementById('music-control');
-        const musicIcon = document.getElementById('music-icon');
         let isPlaying = false;
 
-        // Open Invitation and Play Music
         function openInvitation() {
             const cover = document.getElementById('cover-screen');
             const main = document.getElementById('main-invitation');
@@ -531,34 +604,44 @@
             cover.classList.add('cover-hidden');
             main.classList.add('main-visible');
 
-            playMusic();
+            playAudio();
         }
 
-        // Toggle Music On/Off
+        function playAudio() {
+            audio.currentTime = 0;
+            const playPromise = audio.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    isPlaying = true;
+                    musicBtn.classList.add('music-playing');
+                    musicBtn.textContent = '🎵';
+                }).catch(error => {
+                    console.log("Audio play blocked by browser:", error);
+                    isPlaying = false;
+                    musicBtn.classList.remove('music-playing');
+                    musicBtn.textContent = '🔇';
+                });
+            }
+        }
+
         function toggleMusic() {
             if (isPlaying) {
                 audio.pause();
                 musicBtn.classList.remove('music-playing');
-                // Change to Muted Icon SVG
-                musicIcon.innerHTML = '<path d="M4.27 3L3 4.27l9 9v.28c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4v-1.73l4.27 4.27L20.73 21 22 19.73 4.27 3zM14 7h4V3h-6v4.18l2 2V7z"/>';
+                musicBtn.textContent = '🔇';
                 isPlaying = false;
             } else {
-                playMusic();
+                audio.play().then(() => {
+                    isPlaying = true;
+                    musicBtn.classList.add('music-playing');
+                    musicBtn.textContent = '🎵';
+                }).catch(err => {
+                    console.log("Playback error:", err);
+                });
             }
         }
 
-        function playMusic() {
-            audio.play().then(() => {
-                isPlaying = true;
-                musicBtn.classList.add('music-playing');
-                // Change to Playing Note SVG
-                musicIcon.innerHTML = '<path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>';
-            }).catch(err => {
-                console.log("Audio playback delayed:", err);
-            });
-        }
-
-        // Generate Floating Sparkle Particles
         function createParticles() {
             const container = document.getElementById('particle-container');
             const particleCount = 20;

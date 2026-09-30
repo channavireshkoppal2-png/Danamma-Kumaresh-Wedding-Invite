@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kumaresh & Danamma - Wedding Invitation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-red: #6A050B;
             --dark-red: #4A0005;
-            --gold: #D4AF37;
+            --gold: #C5A059;
             --gold-light: #F3E5AB;
             --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-            --bg-light: #FFFDF8;
+            --bg-cream: #FAF7F2;
             --text-dark: #333333;
             --card-bg: #FFFFFF;
         }
@@ -24,8 +24,8 @@
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-light);
+            font-family: 'Cinzel', serif;
+            background-color: var(--bg-cream);
             color: var(--text-dark);
             line-height: 1.6;
             text-align: center;
@@ -41,43 +41,137 @@
             width: 100vw;
             height: 100vh;
             pointer-events: none;
-            z-index: 10001; /* Layered above cover and main content */
+            z-index: 10001;
         }
 
-        /* --- FLOATING MUSIC TOGGLE BUTTON --- */
+        /* --- NAVIGATION HEADER BAR --- */
+        .nav-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: #FFFDF9;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+            z-index: 9000;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+        }
+
+        .nav-monogram {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            color: #222;
+            font-weight: 600;
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #333;
+        }
+
+        /* --- FULLSCREEN MENU OVERLAY --- */
+        #menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #FFFDF9;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px 25px 40px 25px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        #menu-overlay.menu-active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .close-menu {
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .menu-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 22px;
+            margin-top: 20px;
+        }
+
+        .menu-links a {
+            text-decoration: none;
+            color: #222;
+            font-size: 0.95rem;
+            letter-spacing: 3px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .menu-links a:hover, .menu-links a.active {
+            color: var(--gold);
+        }
+
+        .menu-cover-btn {
+            background: #FAF5E8;
+            border: 1px solid var(--gold);
+            padding: 12px 25px;
+            border-radius: 20px;
+            color: #8A6D3B;
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 0 auto;
+            width: 85%;
+            max-width: 320px;
+        }
+
+        /* --- FLOATING MUSIC BUTTON (BOTTOM RIGHT) --- */
         #music-control {
             position: fixed;
-            top: 20px;
+            bottom: 25px;
             right: 20px;
             z-index: 10000;
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            background: rgba(255, 253, 248, 0.95);
-            backdrop-filter: blur(8px);
-            border: 2px solid var(--gold);
-            box-shadow: 0 4px 15px rgba(180, 130, 40, 0.4);
+            background: #FFFFFF;
+            border: 1px solid var(--gold);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
-        }
-
-        #music-control:hover {
-            transform: scale(1.1);
-            background: #ffffff;
-        }
-
-        .music-playing {
-            animation: musicPulse 2s infinite ease-in-out;
-        }
-
-        @keyframes musicPulse {
-            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6); }
-            70% { box-shadow: 0 0 0 14px rgba(212, 175, 55, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
         }
 
         /* --- FRONT COVER SCREEN --- */
@@ -88,21 +182,18 @@
             width: 100vw;
             height: 100vh;
             background: radial-gradient(circle, #800000 0%, #4a0005 100%);
-            z-index: 9999;
+            z-index: 999999;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s ease;
+            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
             overflow: hidden;
         }
 
         .cover-border {
             position: absolute;
-            top: 15px;
-            bottom: 15px;
-            left: 15px;
-            right: 15px;
+            top: 15px; bottom: 15px; left: 15px; right: 15px;
             border: 2px solid var(--gold);
             border-radius: 12px;
             pointer-events: none;
@@ -134,8 +225,8 @@
         }
 
         .ganesha-frame {
-            width: 150px;
-            height: 150px;
+            width: 140px;
+            height: 140px;
             margin: 10px 0;
             display: flex;
             align-items: center;
@@ -143,8 +234,8 @@
         }
 
         .ganesha-svg {
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             fill: url(#gold-grad);
         }
 
@@ -168,13 +259,6 @@
             cursor: pointer;
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
             margin-top: 20px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.06); }
-            100% { transform: scale(1); }
         }
 
         .cover-hidden {
@@ -183,84 +267,188 @@
             pointer-events: none;
         }
 
-        /* --- MAIN INVITATION CONTENT --- */
+        /* --- MAIN INVITATION CARD (FIRST PAGE) --- */
         #main-invitation {
+            padding-top: 80px;
+            padding-bottom: 40px;
             opacity: 0;
-            transition: opacity 1s ease 0.5s;
-            position: relative;
-            z-index: 1;
+            transition: opacity 1s ease 0.3s;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .main-visible {
             opacity: 1 !important;
         }
 
-        h1, h2, h3 { font-family: 'Cinzel', serif; }
-
-        header {
-            padding: 60px 20px;
-            background: linear-gradient(rgba(255, 253, 250, 0.92), rgba(255, 253, 250, 0.92)), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1000') center/cover;
-            border-bottom: 2px solid var(--gold);
+        .hero-card {
+            width: 90%;
+            max-width: 420px;
+            margin: 0 auto;
+            border: 1px solid rgba(197, 160, 89, 0.5);
+            padding: 8px;
+            border-radius: 4px;
+            background: transparent;
         }
 
-        .names {
-            font-size: 2.4rem;
-            color: var(--primary-red);
-            margin: 15px 0;
+        .hero-inner-border {
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            padding: 45px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.4);
         }
 
-        .date-banner {
-            font-size: 1.1rem;
+        .tagline {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: #777777;
             font-weight: 600;
-            color: var(--dark-red);
+            margin-bottom: 30px;
         }
 
-        .btn {
+        .couple-names {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.2rem;
+            color: #8B6E32;
+            line-height: 1.2;
+            margin: 5px 0;
+            font-weight: normal;
+        }
+
+        .ampersand {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem;
+            color: #8B6E32;
+            margin: 8px 0;
+        }
+
+        .wedding-date {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: #444;
+            margin-top: 35px;
+            font-weight: 600;
+        }
+
+        .wedding-location {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: #666;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        .begun-text {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: #555;
+            margin-top: 40px;
+            font-weight: 500;
+        }
+
+        .timeline-btn {
             display: inline-block;
+            margin-top: 25px;
             padding: 12px 28px;
-            background-color: var(--primary-red);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 25px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-top: 15px;
             border: 1px solid var(--gold);
+            background: #FFFDF9;
+            color: #444;
+            font-family: 'Cinzel', serif;
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
-        section { padding: 50px 20px; max-width: 850px; margin: 0 auto; }
-        .section-title { font-size: 1.7rem; color: var(--primary-red); }
+        .timeline-btn:hover {
+            background: var(--gold);
+            color: #fff;
+        }
+
+        /* --- SECTIONS --- */
+        section {
+            padding: 60px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            letter-spacing: 3px;
+            color: #222;
+            margin-bottom: 30px;
+        }
 
         .timeline-item {
-            background: var(--card-bg);
-            border-left: 4px solid var(--gold);
+            background: #FFFFFF;
+            border-left: 3px solid var(--gold);
             margin: 20px 0;
             padding: 20px;
             text-align: left;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .timeline-item h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            margin: 5px 0;
         }
 
         footer {
-            background-color: #1a0002;
-            color: #fff;
+            background-color: #1A0002;
+            color: #FFF;
             padding: 40px 20px;
-            border-top: 3px solid var(--gold);
+            border-top: 2px solid var(--gold);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- ANIMATED GLITTER & STAR CANVAS -->
+    <!-- CANVAS FOR ANIMATED STAR & GLITTER FLOATING particles -->
     <canvas id="glitter-canvas"></canvas>
 
-    <!-- AUDIO ELEMENT WITH COMPATIBLE FILE SOURCES -->
+    <!-- TOP HEADER WITH MONOGRAM & MENU -->
+    <nav class="nav-header">
+        <div class="nav-monogram">K & D</div>
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open Menu">☰</button>
+    </nav>
+
+    <!-- SLIDE-OUT FULLSCREEN MENU OVERLAY -->
+    <div id="menu-overlay">
+        <div class="menu-header">
+            <div class="nav-monogram">K & D</div>
+            <button class="close-menu" onclick="toggleMenu()" aria-label="Close Menu">✕</button>
+        </div>
+        <div class="menu-links">
+            <a href="#home" class="active" onclick="toggleMenu()">HOME</a>
+            <a href="#couple" onclick="toggleMenu()">COUPLE</a>
+            <a href="#schedule" onclick="toggleMenu()">TIMELINE</a>
+            <a href="#gallery" onclick="toggleMenu()">GALLERY</a>
+            <a href="#events" onclick="toggleMenu()">EVENTS</a>
+            <a href="#blessings" onclick="toggleMenu()">BLESSINGS</a>
+        </div>
+        <button class="menu-cover-btn" onclick="returnToCover()">
+            📜 Invitation Cover
+        </button>
+    </div>
+
+    <!-- AUDIO ELEMENT -->
     <audio id="bg-music" loop playsinline preload="auto">
         <source src="music.mp3" type="audio/mpeg">
         <source src="music.m4a" type="audio/mp4">
         <source src="music.ogg" type="audio/ogg">
     </audio>
 
-    <!-- FLOATING MUSIC BUTTON -->
+    <!-- FLOATING MUSIC BUTTON AT BOTTOM RIGHT -->
     <button id="music-control" onclick="toggleMusic()" aria-label="Toggle Music">🎵</button>
 
     <svg width="0" height="0" style="position:absolute;">
@@ -292,45 +480,66 @@
         </div>
     </div>
 
-    <!-- MAIN INVITATION CONTENT -->
+    <!-- MAIN INVITATION FIRST PAGE -->
     <div id="main-invitation">
-        <header>
-            <div style="color:var(--gold); font-weight:600;">WE ARE GETTING MARRIED</div>
-            <h1 class="names">Kumaresh & Danamma</h1>
-            <div class="date-banner">FRIDAY, DECEMBER 18, 2026</div>
-            <a href="#schedule" class="btn">VIEW WEDDING TIMELINE</a>
-        </header>
+        <div class="hero-card" id="home">
+            <div class="hero-inner-border">
+                <div class="tagline">WE ARE GETTING MARRIED</div>
+
+                <div class="couple-names">Kumaresh</div>
+                <div class="ampersand">&</div>
+                <div class="couple-names">Danamma</div>
+
+                <div class="wedding-date">FRIDAY, DECEMBER 18, 2026</div>
+                <div class="wedding-location">KARNATAKA, INDIA</div>
+
+                <div class="begun-text">OUR WEDDING HAS BEGUN!</div>
+
+                <a href="#schedule" class="timeline-btn">VIEW WEDDING TIMELINE</a>
+            </div>
+        </div>
 
         <section id="schedule">
             <h2 class="section-title">SCHEDULE OF EVENTS</h2>
 
             <div class="timeline-item">
-                <div style="color:var(--primary-red); font-weight:700;">MONDAY, DECEMBER 14, 2026</div>
+                <div style="color:var(--primary-red); font-weight:700; font-size: 0.85rem;">MONDAY, DECEMBER 14, 2026</div>
                 <h3>WEDDING CANOPY CEREMONY</h3>
-                <p><strong>Place:</strong> S K Goudar House</p>
+                <p style="font-size: 0.85rem; color:#555;"><strong>Place:</strong> S K Goudar House</p>
             </div>
 
             <div class="timeline-item">
-                <div style="color:var(--primary-red); font-weight:700;">THURSDAY, DECEMBER 17, 2026</div>
+                <div style="color:var(--primary-red); font-weight:700; font-size: 0.85rem;">THURSDAY, DECEMBER 17, 2026</div>
                 <h3>HALDI CEREMONY & RECEPTION</h3>
-                <p><strong>Haldi:</strong> 9:00 AM | <strong>Reception:</strong> 6:00 PM</p>
+                <p style="font-size: 0.85rem; color:#555;"><strong>Haldi:</strong> 9:00 AM | <strong>Reception:</strong> 6:00 PM</p>
             </div>
 
             <div class="timeline-item">
-                <div style="color:var(--primary-red); font-weight:700;">FRIDAY, DECEMBER 18, 2026</div>
+                <div style="color:var(--primary-red); font-weight:700; font-size: 0.85rem;">FRIDAY, DECEMBER 18, 2026</div>
                 <h3>MUHURTHAM & RECEPTION</h3>
-                <p><strong>Muhurtham:</strong> 9:44 AM | <strong>Reception:</strong> 12:26 PM</p>
+                <p style="font-size: 0.85rem; color:#555;"><strong>Muhurtham:</strong> 9:44 AM | <strong>Reception:</strong> 12:26 PM</p>
             </div>
         </section>
 
         <footer>
             <p><strong>INVITED BY:</strong> Smt. Rukmeenibai @ Shankaralingappa Goudar</p>
-            <p><strong>WITH BEST COMPLIMENTS FROM:</strong> Smt. Chaitra & Muralidhar Koppal</p>
-            <p style="color: var(--gold-light); font-size: 1.1rem; margin-top: 15px;">Kumaresh & Danamma</p>
+            <p style="margin-top: 5px;"><strong>WITH BEST COMPLIMENTS FROM:</strong> Smt. Chaitra & Muralidhar Koppal</p>
+            <p style="color: var(--gold-light); font-size: 1rem; margin-top: 15px; font-family:'Cinzel', serif;">Kumaresh & Danamma</p>
         </footer>
     </div>
 
     <script>
+        /* --- MENU TOGGLE --- */
+        function toggleMenu() {
+            document.getElementById('menu-overlay').classList.toggle('menu-active');
+        }
+
+        function returnToCover() {
+            toggleMenu();
+            document.getElementById('cover-screen').classList.remove('cover-hidden');
+            document.getElementById('main-invitation').classList.remove('main-visible');
+        }
+
         /* --- AUDIO CONTROLS --- */
         const audio = document.getElementById('bg-music');
         const musicBtn = document.getElementById('music-control');
@@ -349,12 +558,10 @@
             if (playPromise !== undefined) {
                 playPromise.then(() => {
                     isPlaying = true;
-                    musicBtn.classList.add('music-playing');
                     musicBtn.textContent = '🎵';
                 }).catch(err => {
-                    console.log("Autoplay restriction error:", err);
+                    console.log("Autoplay restriction:", err);
                     isPlaying = false;
-                    musicBtn.classList.remove('music-playing');
                     musicBtn.textContent = '🔇';
                 });
             }
@@ -363,13 +570,11 @@
         function toggleMusic() {
             if (isPlaying) {
                 audio.pause();
-                musicBtn.classList.remove('music-playing');
                 musicBtn.textContent = '🔇';
                 isPlaying = false;
             } else {
                 audio.play().then(() => {
                     isPlaying = true;
-                    musicBtn.classList.add('music-playing');
                     musicBtn.textContent = '🎵';
                 }).catch(err => {
                     console.log("Audio toggle error:", err);
@@ -388,7 +593,7 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        const particleCount = 65;
+        const particleCount = 60;
         const particles = [];
         const goldColors = ['#D4AF37', '#F3E5AB', '#FFFDF8', '#E6CA65', '#AA771C'];
 
@@ -400,13 +605,13 @@
             reset(initial = false) {
                 this.x = Math.random() * canvas.width;
                 this.y = initial ? Math.random() * canvas.height : -20;
-                this.size = Math.random() * 3 + 1;
-                this.speedY = Math.random() * 0.8 + 0.3;
-                this.speedX = Math.sin(Math.random() * Math.PI * 2) * 0.4;
+                this.size = Math.random() * 2.5 + 1;
+                this.speedY = Math.random() * 0.7 + 0.3;
+                this.speedX = Math.sin(Math.random() * Math.PI * 2) * 0.3;
                 this.color = goldColors[Math.floor(Math.random() * goldColors.length)];
                 this.opacity = Math.random() * 0.8 + 0.2;
                 this.twinkleSpeed = Math.random() * 0.03 + 0.01;
-                this.isStar = Math.random() > 0.4; // 60% chance to render as a 4-point sparkle star
+                this.isStar = Math.random() > 0.45;
                 this.angle = Math.random() * Math.PI;
                 this.spinSpeed = (Math.random() - 0.5) * 0.02;
             }
@@ -416,12 +621,10 @@
                 this.x += Math.sin(this.y * 0.01) * 0.3 + this.speedX;
                 this.angle += this.spinSpeed;
 
-                // Pulsating opacity for a flickering sparkle effect
                 this.opacity += Math.sin(Date.now() * this.twinkleSpeed) * 0.015;
                 if (this.opacity < 0.1) this.opacity = 0.1;
                 if (this.opacity > 1) this.opacity = 1;
 
-                // Reset particle when it floats off the bottom or sides
                 if (this.y > canvas.height + 20 || this.x < -20 || this.x > canvas.width + 20) {
                     this.reset(false);
                 }
@@ -437,10 +640,9 @@
                 ctx.shadowColor = this.color;
 
                 if (this.isStar) {
-                    // Draw a 4-point glitter star
                     ctx.beginPath();
-                    const outer = this.size * 2.2;
-                    const inner = this.size * 0.5;
+                    const outer = this.size * 2;
+                    const inner = this.size * 0.4;
                     for (let i = 0; i < 4; i++) {
                         ctx.lineTo(Math.cos((i * Math.PI) / 2) * outer, Math.sin((i * Math.PI) / 2) * outer);
                         ctx.lineTo(Math.cos((i * Math.PI) / 2 + Math.PI / 4) * inner, Math.sin((i * Math.PI) / 2 + Math.PI / 4) * inner);
@@ -448,7 +650,6 @@
                     ctx.closePath();
                     ctx.fill();
                 } else {
-                    // Draw a glowing round glitter particle
                     ctx.beginPath();
                     ctx.arc(0, 0, this.size, 0, Math.PI * 2);
                     ctx.fill();

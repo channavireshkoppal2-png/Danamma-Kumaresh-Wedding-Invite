@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Kumaresh & Danamma - Wedding Invitation</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -23,13 +23,18 @@
             padding: 0;
         }
 
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
         body {
             font-family: 'Cinzel', serif;
             background-color: var(--bg-cream);
             color: var(--text-dark);
             line-height: 1.6;
             text-align: center;
-            overflow-x: hidden;
             position: relative;
         }
 
@@ -40,7 +45,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(250, 248, 245, 0.95) 100%),
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.85) 0%, rgba(250, 248, 245, 0.95) 100%),
                         radial-gradient(ellipse at top, rgba(243, 229, 171, 0.25), transparent);
             pointer-events: none;
             z-index: 0;
@@ -57,7 +62,7 @@
             z-index: 10001;
         }
 
-        /* --- NAVIGATION HEADER BAR --- */
+        /* --- RESPONSIVE NAVIGATION HEADER BAR --- */
         .nav-header {
             position: fixed;
             top: 0;
@@ -65,18 +70,19 @@
             width: 100%;
             height: 60px;
             background: rgba(255, 253, 249, 0.95);
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 25px;
+            padding: 0 max(20px, 4vw);
             z-index: 9000;
             border-bottom: 1px solid rgba(197, 160, 89, 0.2);
         }
 
         .nav-monogram {
             font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2vw, 1.25rem);
             letter-spacing: 4px;
             color: #222;
             font-weight: 600;
@@ -88,6 +94,10 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: #333;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* --- FULLSCREEN MENU OVERLAY --- */
@@ -97,12 +107,13 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: #FFFDF9;
+            background: rgba(255, 253, 249, 0.98);
+            backdrop-filter: blur(10px);
             z-index: 99999;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 20px 25px 40px 25px;
+            padding: 20px max(20px, 5vw) 40px max(20px, 5vw);
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.4s ease;
@@ -118,6 +129,8 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .close-menu {
@@ -126,20 +139,21 @@
             font-size: 1.6rem;
             cursor: pointer;
             color: #333;
+            padding: 5px;
         }
 
         .menu-links {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 22px;
-            margin-top: 20px;
+            gap: clamp(16px, 3vh, 28px);
+            margin: auto 0;
         }
 
         .menu-links a {
             text-decoration: none;
             color: #222;
-            font-size: 0.95rem;
+            font-size: clamp(0.9rem, 2vw, 1.15rem);
             letter-spacing: 3px;
             font-weight: 500;
             transition: color 0.3s;
@@ -153,7 +167,7 @@
             background: #FAF5E8;
             border: 1px solid var(--gold);
             padding: 12px 25px;
-            border-radius: 20px;
+            border-radius: 25px;
             color: #8A6D3B;
             font-family: 'Cinzel', serif;
             font-size: 0.85rem;
@@ -164,28 +178,38 @@
             justify-content: center;
             gap: 8px;
             margin: 0 auto;
-            width: 85%;
-            max-width: 320px;
+            width: 100%;
+            max-width: 280px;
+            transition: all 0.3s ease;
         }
 
-        /* --- FLOATING MUSIC BUTTON (BOTTOM RIGHT) --- */
+        .menu-cover-btn:hover {
+            background: var(--gold);
+            color: #fff;
+        }
+
+        /* --- FLOATING MUSIC BUTTON --- */
         #music-control {
             position: fixed;
-            bottom: 25px;
-            right: 20px;
+            bottom: clamp(15px, 3vh, 25px);
+            right: clamp(15px, 3vw, 25px);
             z-index: 10000;
-            width: 45px;
-            height: 45px;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
             background: #FFFFFF;
             border: 1px solid var(--gold);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.1rem;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #music-control:hover {
+            transform: scale(1.08);
         }
 
         /* --- FRONT COVER SCREEN --- */
@@ -195,7 +219,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: radial-gradient(circle, #800000 0%, #4a0005 100%);
+            background: radial-gradient(circle at center, #800000 0%, #4a0005 100%);
             z-index: 999999;
             display: flex;
             flex-direction: column;
@@ -203,11 +227,15 @@
             justify-content: center;
             transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
             overflow: hidden;
+            padding: 20px;
         }
 
         .cover-border {
             position: absolute;
-            top: 15px; bottom: 15px; left: 15px; right: 15px;
+            top: clamp(10px, 2vh, 20px);
+            bottom: clamp(10px, 2vh, 20px);
+            left: clamp(10px, 2vw, 20px);
+            right: clamp(10px, 2vw, 20px);
             border: 2px solid var(--gold);
             border-radius: 12px;
             pointer-events: none;
@@ -219,12 +247,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: clamp(8px, 1.5vh, 16px);
+            max-width: 500px;
+            width: 100%;
         }
 
         .monogram {
             font-family: 'Great Vibes', cursive;
-            font-size: 3.8rem;
+            font-size: clamp(3rem, 8vw, 4.5rem);
             color: var(--gold-light);
             background: var(--gold-gradient);
             -webkit-background-clip: text;
@@ -233,46 +263,51 @@
 
         .cover-subtitle {
             font-family: 'Cinzel', serif;
-            font-size: 0.95rem;
+            font-size: clamp(0.8rem, 2vw, 1.05rem);
             color: var(--gold-light);
             letter-spacing: 2px;
         }
 
         .ganesha-frame {
-            width: 140px;
-            height: 140px;
-            margin: 10px 0;
+            width: clamp(100px, 20vh, 140px);
+            height: clamp(100px, 20vh, 140px);
+            margin: clamp(5px, 1vh, 12px) 0;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .ganesha-svg {
-            width: 90px;
-            height: 90px;
+            width: 80%;
+            height: 80%;
             fill: url(#gold-grad);
         }
 
         .god-blessing {
             font-family: 'Cinzel', serif;
             color: var(--gold-light);
-            font-size: 0.85rem;
+            font-size: clamp(0.75rem, 1.8vw, 0.9rem);
             letter-spacing: 3px;
         }
 
         .open-btn {
-            width: 85px;
-            height: 85px;
+            width: clamp(75px, 15vw, 90px);
+            height: clamp(75px, 15vw, 90px);
             border-radius: 50%;
             background: var(--gold-gradient);
             color: var(--dark-red);
             font-family: 'Cinzel', serif;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: clamp(0.85rem, 2vw, 1rem);
             border: 2px solid var(--gold-light);
             cursor: pointer;
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
-            margin-top: 20px;
+            margin-top: clamp(10px, 2vh, 20px);
+            transition: transform 0.3s ease;
+        }
+
+        .open-btn:hover {
+            transform: scale(1.05);
         }
 
         .cover-hidden {
@@ -281,19 +316,19 @@
             pointer-events: none;
         }
 
-        /* --- MAIN INVITATION FIRST PAGE --- */
+        /* --- MAIN INVITATION CARD (RESPONSIVE FOR ALL DEVICES) --- */
         #main-invitation {
             position: relative;
             z-index: 1;
-            padding-top: 80px;
-            padding-bottom: 40px;
+            padding-top: max(80px, 10vh);
+            padding-bottom: 60px;
             opacity: 0;
             transition: opacity 1s ease 0.3s;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            width: 100%;
         }
 
         .main-visible {
@@ -301,20 +336,20 @@
         }
 
         .hero-card {
-            width: 90%;
-            max-width: 420px;
+            width: min(92%, 460px);
             margin: 0 auto;
             border: 1px solid rgba(197, 160, 89, 0.5);
-            padding: 8px;
-            border-radius: 4px;
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(3px);
-            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.08);
+            padding: clamp(6px, 1.5vw, 10px);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
         }
 
         .hero-inner-border {
             border: 1px solid rgba(197, 160, 89, 0.4);
-            padding: 45px 20px;
+            padding: clamp(30px, 5vh, 50px) clamp(15px, 4vw, 30px);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -322,66 +357,67 @@
         }
 
         .tagline {
-            font-size: 0.75rem;
+            font-size: clamp(0.68rem, 1.8vw, 0.8rem);
             letter-spacing: 3px;
-            color: #777777;
+            color: #666;
             font-weight: 600;
-            margin-bottom: 30px;
+            margin-bottom: clamp(20px, 4vh, 32px);
         }
 
         .couple-names {
             font-family: 'Great Vibes', cursive;
-            font-size: 3.2rem;
+            font-size: clamp(2.8rem, 7vw, 3.8rem);
             color: #8B6E32;
-            line-height: 1.2;
-            margin: 5px 0;
+            line-height: 1.15;
+            margin: 2px 0;
             font-weight: normal;
         }
 
         .ampersand {
             font-family: 'Great Vibes', cursive;
-            font-size: 2rem;
+            font-size: clamp(1.8rem, 5vw, 2.3rem);
             color: #8B6E32;
-            margin: 8px 0;
+            margin: 6px 0;
         }
 
         .wedding-date {
-            font-size: 0.8rem;
+            font-size: clamp(0.75rem, 1.8vw, 0.88rem);
             letter-spacing: 2px;
-            color: #444;
-            margin-top: 35px;
+            color: #333;
+            margin-top: clamp(25px, 4vh, 35px);
             font-weight: 600;
         }
 
         .wedding-location {
-            font-size: 0.75rem;
+            font-size: clamp(0.7rem, 1.6vw, 0.8rem);
             letter-spacing: 2px;
-            color: #666;
+            color: #555;
             margin-top: 8px;
             font-weight: 500;
         }
 
         .begun-text {
-            font-size: 0.8rem;
+            font-size: clamp(0.72rem, 1.6vw, 0.8rem);
             letter-spacing: 2px;
-            color: #555;
-            margin-top: 40px;
+            color: #444;
+            margin-top: clamp(25px, 4vh, 35px);
             font-weight: 500;
         }
 
         .timeline-btn {
             display: inline-block;
-            margin-top: 25px;
-            padding: 12px 28px;
+            margin-top: clamp(20px, 3vh, 28px);
+            padding: 12px clamp(20px, 4vw, 32px);
             border: 1px solid var(--gold);
             background: #FFFDF9;
             color: #444;
             font-family: 'Cinzel', serif;
-            font-size: 0.72rem;
+            font-size: clamp(0.68rem, 1.5vw, 0.75rem);
             letter-spacing: 2px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         }
 
         .timeline-btn:hover {
@@ -389,46 +425,62 @@
             color: #fff;
         }
 
-        /* --- SECTIONS --- */
+        /* --- SECTIONS (TIMELINE & FOOTER) --- */
         section {
-            padding: 60px 20px;
-            max-width: 600px;
+            padding: clamp(40px, 6vh, 60px) 20px;
+            width: min(92%, 650px);
             margin: 0 auto;
         }
 
         .section-title {
-            font-size: 1.3rem;
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
             letter-spacing: 3px;
             color: #222;
-            margin-bottom: 30px;
+            margin-bottom: clamp(20px, 4vh, 35px);
         }
 
         .timeline-item {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.88);
             border-left: 3px solid var(--gold);
-            margin: 20px 0;
-            padding: 20px;
+            margin: 16px 0;
+            padding: clamp(16px, 3vw, 24px);
             text-align: left;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
             font-family: 'Montserrat', sans-serif;
-            backdrop-filter: blur(2px);
+            backdrop-filter: blur(3px);
+            border-radius: 0 4px 4px 0;
         }
 
         .timeline-item h3 {
             font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            margin: 5px 0;
+            font-size: clamp(0.9rem, 2vw, 1.05rem);
+            margin: 6px 0;
+            color: #222;
         }
 
         footer {
+            width: 100%;
             background-color: #1A0002;
             color: #FFF;
-            padding: 40px 20px;
+            padding: clamp(30px, 5vh, 50px) 20px;
             border-top: 2px solid var(--gold);
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.85rem;
+            font-size: clamp(0.78rem, 1.8vw, 0.88rem);
             position: relative;
             z-index: 2;
+        }
+
+        /* --- DESKTOP SPECIFIC ADJUSTMENTS --- */
+        @media (min-width: 992px) {
+            .hero-card {
+                max-width: 480px;
+            }
+
+            .timeline-item {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
         }
     </style>
 </head>
@@ -547,8 +599,8 @@
 
         <footer>
             <p><strong>INVITED BY:</strong> Smt. Rukmeenibai @ Shankaralingappa Goudar</p>
-            <p style="margin-top: 5px;"><strong>WITH BEST COMPLIMENTS FROM:</strong> Smt. Chaitra & Muralidhar Koppal</p>
-            <p style="color: var(--gold-light); font-size: 1rem; margin-top: 15px; font-family:'Cinzel', serif;">Kumaresh & Danamma</p>
+            <p style="margin-top: 6px;"><strong>WITH BEST COMPLIMENTS FROM:</strong> Smt. Chaitra & Muralidhar Koppal</p>
+            <p style="color: var(--gold-light); font-size: 1rem; margin-top: 16px; font-family:'Cinzel', serif;">Kumaresh & Danamma</p>
         </footer>
     </div>
 
@@ -606,7 +658,7 @@
             }
         }
 
-        /* --- CONTINUOUS WHITISH & GOLD GLITTER ENGINE --- */
+        /* --- CONTINUOUS RESPONSIVE GLITTER & STAR ENGINE --- */
         const canvas = document.getElementById('glitter-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -617,9 +669,9 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        const particleCount = 75;
+        // Dynamically scale particle count based on screen size
+        const particleCount = Math.min(Math.floor(window.innerWidth / 12), 80);
         const particles = [];
-        // Light whitish and warm gold sparkle colors
         const glitterColors = ['#FFFFFF', '#FFFDF5', '#F3E5AB', '#E8D28B', '#D4AF37'];
 
         class Particle {
@@ -630,11 +682,11 @@
             reset(initial = false) {
                 this.x = Math.random() * canvas.width;
                 this.y = initial ? Math.random() * canvas.height : -20;
-                this.size = Math.random() * 2.8 + 0.8;
+                this.size = Math.random() * 2.5 + 0.8;
                 this.speedY = Math.random() * 0.6 + 0.2;
                 this.speedX = Math.sin(Math.random() * Math.PI * 2) * 0.3;
                 this.color = glitterColors[Math.floor(Math.random() * glitterColors.length)];
-                this.opacity = Math.random() * 0.85 + 0.15;
+                this.opacity = Math.random() * 0.8 + 0.2;
                 this.twinkleSpeed = Math.random() * 0.03 + 0.01;
                 this.isStar = Math.random() > 0.4;
                 this.angle = Math.random() * Math.PI;
@@ -661,7 +713,7 @@
                 ctx.rotate(this.angle);
                 ctx.globalAlpha = this.opacity;
                 ctx.fillStyle = this.color;
-                ctx.shadowBlur = this.size * 2.5;
+                ctx.shadowBlur = this.size * 2;
                 ctx.shadowColor = this.color;
 
                 if (this.isStar) {

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cover Page - K&D</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, #FFFBF2 0%, #FBEBD3 60%, #F5D3A9 100%);
+            font-family: 'Cinzel', serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* OUTER BORDER FRAME */
+        .cover-frame {
+            position: absolute;
+            top: 20px;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            border: 1.5px solid rgba(197, 94, 26, 0.45);
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
+        /* INNER CONTAINER */
+        .cover-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        /* MONOGRAM LOGO */
+        .monogram {
+            font-size: 3.8rem;
+            font-weight: 600;
+            color: #C55E1A;
+            letter-spacing: 3px;
+            line-height: 1;
+        }
+
+        /* SUBTITLE */
+        .tagline {
+            font-size: 1.15rem;
+            color: #C55E1A;
+            letter-spacing: 1.5px;
+            margin-top: 12px;
+            margin-bottom: 35px;
+            font-weight: 400;
+        }
+
+        /* LORD GANESHA ARTWORK */
+        .ganesha-svg {
+            width: 220px;
+            height: auto;
+            margin-bottom: 30px;
+            filter: drop-shadow(0px 2px 4px rgba(197, 94, 26, 0.15));
+        }
+
+        /* CHANT TEXT */
+        .chant {
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: #C55E1A;
+            letter-spacing: 4px;
+            line-height: 1.35;
+            max-width: 380px;
+        }
+
+        /* MANDALA DECORATIVE BOTTOM */
+        .mandala-bottom {
+            position: absolute;
+            bottom: -80px;
+            width: 320px;
+            height: 160px;
+            opacity: 0.35;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cover-frame"></div>
+
+    <div class="cover-container">
+        <!-- TOP MONOGRAM & TEXT -->
+        <div class="monogram">K&D</div>
+        <div class="tagline">And so, Our journey Begins</div>
+
+        <!-- LORD GANESHA VECTOR -->
+        <svg class="ganesha-svg" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M100 20 C110 8, 125 10, 125 25 C125 35, 110 40, 100 42 C90 40, 75 35, 75 25 C75 10, 90 8, 100 20 Z" fill="#C55E1A"/>
+            <path d="M70 45 C80 35, 120 35, 130 45 C140 55, 145 75, 135 90 C125 105, 115 110, 100 120 C85 110, 75 105, 65 90 C55 75, 60 55, 70 45 Z" stroke="#C55E1A" stroke-width="4" fill="none"/>
+            <path d="M100 60 C115 65, 130 80, 125 110 C120 140, 100 160, 80 150 C65 142, 60 125, 75 115 C90 105, 105 125, 100 138" stroke="#C55E1A" stroke-width="6" stroke-linecap="round" fill="none"/>
+            <circle cx="118" cy="82" r="3" fill="#C55E1A"/>
+            <path d="M60 70 C45 75, 40 95, 55 110 C65 120, 75 115, 75 105" stroke="#C55E1A" stroke-width="4" fill="none"/>
+            <path d="M140 70 C155 75, 160 95, 145 110 C135 120, 125 115, 125 105" stroke="#C55E1A" stroke-width="4" fill="none"/>
+            <path d="M90 155 C70 165, 60 185, 80 200 C100 215, 130 205, 145 185 C155 170, 145 150, 125 155" stroke="#C55E1A" stroke-width="5" stroke-linecap="round" fill="none"/>
+            <path d="M130 185 C140 195, 150 190, 155 180 C160 170, 150 160, 140 165" stroke="#C55E1A" stroke-width="3" fill="none"/>
+        </svg>
+
+        <!-- MAIN CHANT -->
+        <div class="chant">OM SHREE GANESHAY NAMAH</div>
+    </div>
+
+    <!-- MANDALA BOTTOM PATTERN -->
+    <svg class="mandala-bottom" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="100" r="90" stroke="#C55E1A" stroke-width="2"/>
+        <circle cx="100" cy="100" r="70" stroke="#C55E1A" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <circle cx="100" cy="100" r="50" stroke="#C55E1A" stroke-width="1"/>
+    </svg>
+
+</body>
+</html>

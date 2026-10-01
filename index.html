@@ -2,20 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kumaresh & Danamma - Wedding Invitation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Couple Section</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-red: #6A050B;
             --dark-red: #4A0005;
             --bg-maroon: #580308;
             --gold: #C5A059;
-            --gold-dark: #8B6E32;
             --gold-light: #F3E5AB;
             --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             --bg-cream: #FAF8F5;
-            --text-dark: #333333;
+            --card-cream: #FAF5EE;
         }
 
         * {
@@ -24,507 +23,41 @@
             padding: 0;
         }
 
-        html, body {
-            width: 100%;
-            height: 100%;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
         body {
             font-family: 'Cinzel', serif;
-            background-color: var(--bg-cream);
-            color: var(--text-dark);
-            line-height: 1.6;
-            text-align: center;
-            position: relative;
-        }
-
-        /* --- WHITISH GLITTER BACKGROUND OVERLAY --- */
-        .whitish-glitter-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.85) 0%, rgba(250, 248, 245, 0.95) 100%),
-                        radial-gradient(ellipse at top, rgba(243, 229, 171, 0.25), transparent);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* --- CONTINUOUS GLITTER & STAR CANVAS --- */
-        #glitter-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 10001;
-        }
-
-        /* --- RESPONSIVE NAVIGATION HEADER BAR --- */
-        .nav-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            background: rgba(255, 253, 249, 0.95);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 max(20px, 4vw);
-            z-index: 9000;
-            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
-        }
-
-        .nav-monogram {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            letter-spacing: 4px;
-            color: #222;
-            font-weight: 600;
-        }
-
-        .menu-toggle {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #333;
-            padding: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* --- FULLSCREEN MENU OVERLAY --- */
-        #menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(255, 253, 249, 0.98);
-            backdrop-filter: blur(10px);
-            z-index: 99999;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 20px max(20px, 5vw) 40px max(20px, 5vw);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s ease;
-        }
-
-        #menu-overlay.menu-active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .menu-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .close-menu {
-            background: none;
-            border: none;
-            font-size: 1.6rem;
-            cursor: pointer;
-            color: #333;
-            padding: 5px;
-        }
-
-        .menu-links {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: clamp(16px, 3vh, 28px);
-            margin: auto 0;
-        }
-
-        .menu-links a {
-            text-decoration: none;
-            color: #222;
-            font-size: clamp(0.9rem, 2vw, 1.15rem);
-            letter-spacing: 3px;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .menu-links a:hover, .menu-links a.active {
-            color: var(--gold);
-        }
-
-        .menu-cover-btn {
-            background: #FAF5E8;
-            border: 1px solid var(--gold);
-            padding: 12px 25px;
-            border-radius: 25px;
-            color: #8A6D3B;
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin: 0 auto;
-            width: 100%;
-            max-width: 280px;
-            transition: all 0.3s ease;
-        }
-
-        .menu-cover-btn:hover {
-            background: var(--gold);
-            color: #fff;
-        }
-
-        /* --- FLOATING MUSIC BUTTON --- */
-        #music-control {
-            position: fixed;
-            bottom: clamp(15px, 3vh, 25px);
-            right: clamp(15px, 3vw, 25px);
-            z-index: 10000;
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            background: #FFFFFF;
-            border: 1px solid var(--gold);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        #music-control:hover {
-            transform: scale(1.08);
-        }
-
-        /* --- FRONT COVER SCREEN --- */
-        #cover-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: radial-gradient(circle at center, #800000 0%, #4a0005 100%);
-            z-index: 999999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
-            overflow: hidden;
-            padding: 20px;
-        }
-
-        .cover-border {
-            position: absolute;
-            top: clamp(10px, 2vh, 20px);
-            bottom: clamp(10px, 2vh, 20px);
-            left: clamp(10px, 2vw, 20px);
-            right: clamp(10px, 2vw, 20px);
-            border: 2px solid var(--gold);
-            border-radius: 12px;
-            pointer-events: none;
-        }
-
-        .cover-content {
-            z-index: 2;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: clamp(8px, 1.5vh, 16px);
-            max-width: 500px;
-            width: 100%;
-        }
-
-        .monogram {
-            font-family: 'Great Vibes', cursive;
-            font-size: clamp(3rem, 8vw, 4.5rem);
-            color: var(--gold-light);
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .cover-subtitle {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(0.8rem, 2vw, 1.05rem);
-            color: var(--gold-light);
-            letter-spacing: 2px;
-        }
-
-        .ganesha-frame {
-            width: clamp(100px, 20vh, 140px);
-            height: clamp(100px, 20vh, 140px);
-            margin: clamp(5px, 1vh, 12px) 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .ganesha-svg {
-            width: 80%;
-            height: 80%;
-            fill: url(#gold-grad);
-        }
-
-        .god-blessing {
-            font-family: 'Cinzel', serif;
-            color: var(--gold-light);
-            font-size: clamp(0.75rem, 1.8vw, 0.9rem);
-            letter-spacing: 3px;
-        }
-
-        .open-btn {
-            width: clamp(75px, 15vw, 90px);
-            height: clamp(75px, 15vw, 90px);
-            border-radius: 50%;
-            background: var(--gold-gradient);
-            color: var(--dark-red);
-            font-family: 'Cinzel', serif;
-            font-weight: 700;
-            font-size: clamp(0.85rem, 2vw, 1rem);
-            border: 2px solid var(--gold-light);
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
-            margin-top: clamp(10px, 2vh, 20px);
-            transition: transform 0.3s ease;
-        }
-
-        .open-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .cover-hidden {
-            transform: translateY(-100vh);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* --- MAIN CONTENT CONTAINER --- */
-        #main-invitation {
-            position: relative;
-            z-index: 1;
-            padding-top: 60px;
-            opacity: 0;
-            transition: opacity 1s ease 0.3s;
-            min-height: 100vh;
-            width: 100%;
-        }
-
-        .main-visible {
-            opacity: 1 !important;
-        }
-
-        /* --- FIRST PAGE: HERO CARD (PARCHMENT IMAGE STYLE) --- */
-        .hero-section {
-            padding: max(30px, 5vh) 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-
-        .hero-card {
-            width: min(92%, 480px);
-            margin: 0 auto;
-            position: relative;
-            border-radius: 6px;
-            box-shadow: 0 12px 35px rgba(139, 110, 50, 0.15);
-            background-color: #F8ECE1;
-            background-image: 
-                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.6) 0%, rgba(240, 218, 190, 0.5) 70%, rgba(218, 182, 142, 0.8) 100%),
-                radial-gradient(circle at 10% 20%, rgba(186, 137, 93, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(186, 137, 93, 0.15) 0%, transparent 40%);
-            overflow: hidden;
-            padding: 12px;
-        }
-
-        .corner-ornament {
-            position: absolute;
-            width: clamp(55px, 14vw, 85px);
-            height: clamp(55px, 14vw, 85px);
-            pointer-events: none;
-            z-index: 3;
-            color: #8C5331;
-        }
-
-        .corner-top-left { top: 6px; left: 6px; }
-        .corner-top-right { top: 6px; right: 6px; transform: scaleX(-1); }
-        .corner-bottom-left { bottom: 6px; left: 6px; transform: scaleY(-1); }
-        .corner-bottom-right { bottom: 6px; right: 6px; transform: scale(-1, -1); }
-
-        .center-ornament-top {
-            position: absolute;
-            top: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: clamp(100px, 25vw, 150px);
-            height: 25px;
-            color: #8C5331;
-            pointer-events: none;
-            z-index: 3;
-        }
-
-        .center-ornament-bottom {
-            position: absolute;
-            bottom: 8px;
-            left: 50%;
-            transform: translateX(-50%) rotate(180deg);
-            width: clamp(100px, 25vw, 150px);
-            height: 25px;
-            color: #8C5331;
-            pointer-events: none;
-            z-index: 3;
-        }
-
-        .hero-inner-border {
-            position: relative;
-            padding: clamp(45px, 6vh, 60px) clamp(20px, 5vw, 35px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 2;
-        }
-
-        .hero-inner-border::before, .hero-inner-border::after {
-            content: '';
-            position: absolute;
-            top: 10%;
-            bottom: 10%;
-            width: 1px;
-            background: #8C5331;
-            opacity: 0.85;
-        }
-
-        .hero-inner-border::before { left: 16px; }
-        .hero-inner-border::after { right: 16px; }
-
-        .bracket-hook {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            border-color: #8C5331;
-            border-style: solid;
-            pointer-events: none;
-            opacity: 0.85;
-        }
-
-        .hook-tl { top: 10%; left: 16px; border-width: 1px 0 0 1px; }
-        .hook-bl { bottom: 10%; left: 16px; border-width: 0 0 1px 1px; }
-        .hook-tr { top: 10%; right: 16px; border-width: 1px 1px 0 0; }
-        .hook-br { bottom: 10%; right: 16px; border-width: 0 1px 1px 0; }
-
-        .tagline {
-            font-size: clamp(0.68rem, 1.8vw, 0.8rem);
-            letter-spacing: 3px;
-            color: #5C4033;
-            font-weight: 600;
-            margin-bottom: clamp(20px, 4vh, 32px);
-        }
-
-        .couple-names {
-            font-family: 'Great Vibes', cursive;
-            font-size: clamp(2.8rem, 7vw, 3.8rem);
-            color: #6A1B1A;
-            line-height: 1.15;
-            margin: 2px 0;
-            font-weight: normal;
-        }
-
-        .ampersand {
-            font-family: 'Great Vibes', cursive;
-            font-size: clamp(1.8rem, 5vw, 2.3rem);
-            color: #8B6E32;
-            margin: 6px 0;
-        }
-
-        .wedding-date {
-            font-size: clamp(0.75rem, 1.8vw, 0.88rem);
-            letter-spacing: 2px;
-            color: #4A2E1A;
-            margin-top: clamp(25px, 4vh, 35px);
-            font-weight: 600;
-        }
-
-        .wedding-location {
-            font-size: clamp(0.7rem, 1.6vw, 0.8rem);
-            letter-spacing: 2px;
-            color: #6A4028;
-            margin-top: 8px;
-            font-weight: 500;
-        }
-
-        .begun-text {
-            font-size: clamp(0.72rem, 1.6vw, 0.8rem);
-            letter-spacing: 2px;
-            color: #5C4033;
-            margin-top: clamp(25px, 4vh, 35px);
-            font-weight: 600;
-        }
-
-        .timeline-btn {
-            display: inline-block;
-            margin-top: clamp(20px, 3vh, 28px);
-            padding: 12px clamp(20px, 4vw, 32px);
-            border: 1px solid #8C5331;
-            background: rgba(255, 253, 249, 0.9);
-            color: #4A2E1A;
-            font-family: 'Cinzel', serif;
-            font-size: clamp(0.68rem, 1.5vw, 0.75rem);
-            letter-spacing: 2px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .timeline-btn:hover {
-            background: #8C5331;
-            color: #fff;
-        }
-
-        /* --- SECOND PAGE: THE COUPLE SECTION (MATCHING REFERENCE IMAGE 2) --- */
-        .couple-section {
             background-color: var(--bg-maroon);
             background-image: 
                 radial-gradient(circle at 50% 30%, rgba(138, 12, 22, 0.8) 0%, rgba(60, 0, 5, 0.95) 100%),
                 radial-gradient(circle at 10% 80%, rgba(20, 0, 2, 0.5) 0%, transparent 50%);
-            padding: clamp(50px, 8vh, 80px) 20px;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 15px;
+        }
+
+        /* --- THE COUPLE SECTION CONTAINER --- */
+        .couple-section {
             width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
-            box-shadow: inset 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 -10px 30px rgba(0, 0, 0, 0.4);
         }
 
         .couple-heading {
             font-family: 'Cinzel', serif;
-            font-size: clamp(1.8rem, 5vw, 2.6rem);
-            letter-spacing: 6px;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            letter-spacing: 5px;
             color: var(--gold-light);
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .couple-divider {
@@ -533,44 +66,43 @@
             justify-content: center;
             gap: 12px;
             color: var(--gold);
-            font-size: 0.9rem;
-            margin-bottom: 16px;
+            font-size: 0.85rem;
+            margin-bottom: 14px;
         }
 
         .couple-tagline {
             font-family: 'Cinzel', serif;
-            font-size: clamp(0.72rem, 2vw, 0.95rem);
+            font-size: clamp(0.72rem, 2vw, 0.9rem);
             letter-spacing: 3px;
             color: #F8E5BB;
             font-weight: 500;
-            max-width: 500px;
-            margin-bottom: clamp(35px, 6vh, 55px);
+            margin-bottom: 35px;
             text-transform: uppercase;
         }
 
+        /* --- CARDS CONTAINER --- */
         .couple-cards-container {
             display: flex;
             flex-direction: column;
-            gap: clamp(30px, 5vh, 45px);
-            width: min(92%, 480px);
-            margin: 0 auto;
+            gap: 30px;
+            width: 100%;
         }
 
         /* CREAM PROFILE CARD */
         .person-card {
-            background-color: #FAF5EE;
+            background-color: var(--card-cream);
             background-image: radial-gradient(circle at 50% 50%, #FFFFFF 0%, #FAF2E6 100%);
             border-radius: 8px;
             border: 1px solid rgba(197, 160, 89, 0.4);
-            padding: clamp(25px, 4vh, 35px) clamp(20px, 4vw, 30px);
+            padding: 35px 20px 28px 20px;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* CARD DOUBLE BORDER */
+        /* CARD DOUBLE INNER BORDER */
         .person-card::after {
             content: '';
             position: absolute;
@@ -578,20 +110,20 @@
             bottom: 6px;
             left: 6px;
             right: 6px;
-            border: 1px solid rgba(197, 160, 89, 0.3);
+            border: 1px solid rgba(197, 160, 89, 0.35);
             border-radius: 5px;
             pointer-events: none;
         }
 
         /* CIRCULAR AVATAR FRAME */
         .avatar-frame {
-            width: clamp(100px, 22vw, 125px);
-            height: clamp(100px, 22vw, 125px);
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            padding: 4px;
+            padding: 3px;
             background: var(--gold-gradient);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             position: relative;
             z-index: 2;
         }
@@ -607,7 +139,7 @@
 
         .role-title {
             font-family: 'Cinzel', serif;
-            font-size: clamp(0.7rem, 1.8vw, 0.8rem);
+            font-size: 0.75rem;
             letter-spacing: 3px;
             color: #7A5B28;
             font-weight: 600;
@@ -617,13 +149,14 @@
 
         .person-name {
             font-family: 'Great Vibes', cursive;
-            font-size: clamp(2.4rem, 6vw, 3.2rem);
-            color: #6A050B;
+            font-size: clamp(2.5rem, 6vw, 3.2rem);
+            color: var(--primary-red);
             font-weight: normal;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             line-height: 1.1;
         }
 
+        /* LEAF / FLOWER DIVIDER ICON */
         .leaf-icon {
             width: 22px;
             height: 22px;
@@ -633,417 +166,111 @@
         .person-quote {
             font-family: 'Cinzel', serif;
             font-style: italic;
-            font-size: clamp(0.75rem, 1.8vw, 0.85rem);
-            color: #555555;
+            font-size: 0.82rem;
+            color: #444444;
             line-height: 1.6;
-            max-width: 380px;
+            max-width: 360px;
         }
 
-        /* --- OTHER SECTIONS --- */
-        section {
-            padding: clamp(40px, 6vh, 60px) 20px;
-            width: min(92%, 650px);
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: clamp(1.1rem, 3vw, 1.4rem);
-            letter-spacing: 3px;
-            color: #222;
-            margin-bottom: clamp(20px, 4vh, 35px);
-        }
-
-        .timeline-item {
-            background: rgba(255, 255, 255, 0.88);
-            border-left: 3px solid var(--gold);
-            margin: 16px 0;
-            padding: clamp(16px, 3vw, 24px);
-            text-align: left;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-            font-family: 'Montserrat', sans-serif;
-            backdrop-filter: blur(3px);
-            border-radius: 0 4px 4px 0;
-        }
-
-        .timeline-item h3 {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(0.9rem, 2vw, 1.05rem);
-            margin: 6px 0;
-            color: #222;
-        }
-
-        footer {
-            width: 100%;
-            background-color: #1A0002;
-            color: #FFF;
-            padding: clamp(30px, 5vh, 50px) 20px;
-            border-top: 2px solid var(--gold);
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(0.78rem, 1.8vw, 0.88rem);
+        /* --- AI COUPLE PORTRAIT FRAME SECTION --- */
+        .couple-portrait-frame {
+            background: #FFFFFF;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(197, 160, 89, 0.5);
             position: relative;
-            z-index: 2;
+            margin: 5px 0;
+        }
+
+        .couple-portrait-img {
+            width: 100%;
+            height: auto;
+            border-radius: 2px;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* DECORATIVE CORNER ACCENTS FOR COUPLE FRAME */
+        .corner-flower-tl {
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            font-size: 1.5rem;
+            z-index: 5;
+        }
+
+        .corner-leaf-br {
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            font-size: 1.4rem;
+            z-index: 5;
         }
     </style>
 </head>
 <body>
 
-    <!-- WHITISH GLITTER BACKGROUND LAYER -->
-    <div class="whitish-glitter-bg"></div>
+    <div class="couple-section" id="couple">
+        <!-- SECTION TITLE -->
+        <h2 class="couple-heading">THE COUPLE</h2>
 
-    <!-- CANVAS FOR ANIMATED STAR & GLITTER FLOATING PARTICLES -->
-    <canvas id="glitter-canvas"></canvas>
-
-    <!-- TOP HEADER WITH MONOGRAM & MENU -->
-    <nav class="nav-header">
-        <div class="nav-monogram">K & D</div>
-        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open Menu">☰</button>
-    </nav>
-
-    <!-- SLIDE-OUT FULLSCREEN MENU OVERLAY -->
-    <div id="menu-overlay">
-        <div class="menu-header">
-            <div class="nav-monogram">K & D</div>
-            <button class="close-menu" onclick="toggleMenu()" aria-label="Close Menu">✕</button>
+        <div class="couple-divider">
+            <span>⚜</span>
+            <span>◆</span>
+            <span>⚜</span>
         </div>
-        <div class="menu-links">
-            <a href="#home" class="active" onclick="toggleMenu()">HOME</a>
-            <a href="#couple" onclick="toggleMenu()">COUPLE</a>
-            <a href="#schedule" onclick="toggleMenu()">TIMELINE</a>
-            <a href="#gallery" onclick="toggleMenu()">GALLERY</a>
-            <a href="#events" onclick="toggleMenu()">EVENTS</a>
-            <a href="#blessings" onclick="toggleMenu()">BLESSINGS</a>
-        </div>
-        <button class="menu-cover-btn" onclick="returnToCover()">
-            📜 Invitation Cover
-        </button>
-    </div>
 
-    <!-- AUDIO ELEMENT -->
-    <audio id="bg-music" loop playsinline preload="auto">
-        <source src="music.mp3" type="audio/mpeg">
-        <source src="music.m4a" type="audio/mp4">
-        <source src="music.ogg" type="audio/ogg">
-    </audio>
+        <p class="couple-tagline">Different Stories, One Beautiful Forever</p>
 
-    <!-- FLOATING MUSIC BUTTON -->
-    <button id="music-control" onclick="toggleMusic()" aria-label="Toggle Music">🎵</button>
+        <div class="couple-cards-container">
+            
+            <!-- 1. BRIDE CARD -->
+            <div class="person-card">
+                <div class="avatar-frame">
+                    <!-- AI Illustrated Bride Avatar -->
+                    <img class="avatar-img" src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=400&q=80" alt="Danamma - The Bride">
+                </div>
 
-    <svg width="0" height="0" style="position:absolute;">
-        <defs>
-            <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#bf953f" />
-                <stop offset="50%" stop-color="#b38728" />
-                <stop offset="100%" stop-color="#aa771c" />
-            </linearGradient>
-        </defs>
-    </svg>
+                <div class="role-title">THE BRIDE</div>
+                <div class="person-name">Danamma</div>
 
-    <!-- FRONT COVER SCREEN -->
-    <div id="cover-screen">
-        <div class="cover-border"></div>
-        <div class="cover-content">
-            <div class="monogram">K & D</div>
-            <p class="cover-subtitle">And So, Our Journey Begins</p>
-
-            <div class="ganesha-frame">
-                <svg class="ganesha-svg" viewBox="0 0 24 24">
-                    <path d="M12,2A3,3 0 0,0 9,5C9,6.1 9.6,7.05 10.5,7.56C8.42,8.37 7,10.41 7,12.8C7,14.58 7.82,16.17 9.1,17.22C8.4,18.05 8,19.1 8,20.25A1.75,1.75 0 0,0 9.75,22H14.25A1.75,1.75 0 0,0 16,20.25C16,19.1 15.6,18.05 14.9,17.22C16.18,16.17 17,14.58 17,12.8C17,10.41 15.58,8.37 13.5,7.56C14.4,7.05 15,6.1 15,5A3,3 0 0,0 12,2M12,4A1,1 0 0,1 13,5A1,1 0 0,1 12,6A1,1 0 0,1 11,5A1,1 0 0,1 12,4M12,9A4,4 0 0,1 16,13C16,14.6 15.1,15.9 13.8,16.5C13.3,16.7 12.7,16.8 12,16.8C11.3,16.8 10.7,16.7 10.2,16.5C8.9,15.9 8,14.6 8,13A4,4 0 0,1 12,9Z"/>
+                <!-- Green Leaf SVG Accent -->
+                <svg class="leaf-icon" viewBox="0 0 24 24" fill="#6A9A3B">
+                    <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,20.08C12,18 19,13 22,5C22,5 19,4 17,8Z"/>
                 </svg>
+
+                <p class="person-quote">"Dreaming of forever and grateful for every blessing that led to this moment"</p>
             </div>
 
-            <div class="god-blessing">SRI KULADEVATHA PRASANNA</div>
+            <!-- 2. AI GENERATED COUPLE PORTRAIT FRAME (MIDDLE IMAGE) -->
+            <div class="couple-portrait-frame">
+                <span class="corner-flower-tl">🌸</span>
+                <!-- Replace src with your generated AI wedding couple illustration image -->
+                <img class="couple-portrait-img" src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80" alt="Traditional Indian Wedding Couple Illustration">
+                <span class="corner-leaf-br">🍃</span>
+            </div>
 
-            <button class="open-btn" onclick="openInvitation()">OPEN</button>
+            <!-- 3. GROOM CARD -->
+            <div class="person-card">
+                <div class="avatar-frame">
+                    <!-- AI Illustrated Groom Avatar -->
+                    <img class="avatar-img" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80" alt="Kumaresh - The Groom">
+                </div>
+
+                <div class="role-title">THE GROOM</div>
+                <div class="person-name">Kumaresh</div>
+
+                <!-- Green Leaf SVG Accent -->
+                <svg class="leaf-icon" viewBox="0 0 24 24" fill="#6A9A3B">
+                    <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,20.08C12,18 19,13 22,5C22,5 19,4 17,8Z"/>
+                </svg>
+
+                <p class="person-quote">"Ready to walk hand in hand, creating endless memories and a lifetime of happiness"</p>
+            </div>
+
         </div>
     </div>
 
-    <!-- MAIN INVITATION CONTENT -->
-    <div id="main-invitation">
-        
-        <!-- FIRST PAGE: HERO CARD -->
-        <div class="hero-section" id="home">
-            <div class="hero-card">
-                
-                <!-- SVG CORNER ORNAMENTS -->
-                <svg class="corner-ornament corner-top-left" viewBox="0 0 100 100" fill="currentColor">
-                    <path d="M5,5 L40,5 C25,12 15,22 10,40 L10,90 C8,60 25,25 90,10 L5,5 Z M20,20 C35,25 45,35 50,50 C35,45 25,35 20,20 Z" />
-                    <circle cx="8" cy="8" r="3"/>
-                    <circle cx="88" cy="8" r="2"/>
-                    <circle cx="8" cy="88" r="2"/>
-                </svg>
-                <svg class="corner-ornament corner-top-right" viewBox="0 0 100 100" fill="currentColor">
-                    <path d="M5,5 L40,5 C25,12 15,22 10,40 L10,90 C8,60 25,25 90,10 L5,5 Z M20,20 C35,25 45,35 50,50 C35,45 25,35 20,20 Z" />
-                    <circle cx="8" cy="8" r="3"/>
-                    <circle cx="88" cy="8" r="2"/>
-                    <circle cx="8" cy="88" r="2"/>
-                </svg>
-                <svg class="corner-ornament corner-bottom-left" viewBox="0 0 100 100" fill="currentColor">
-                    <path d="M5,5 L40,5 C25,12 15,22 10,40 L10,90 C8,60 25,25 90,10 L5,5 Z M20,20 C35,25 45,35 50,50 C35,45 25,35 20,20 Z" />
-                    <circle cx="8" cy="8" r="3"/>
-                    <circle cx="88" cy="8" r="2"/>
-                    <circle cx="8" cy="88" r="2"/>
-                </svg>
-                <svg class="corner-ornament corner-bottom-right" viewBox="0 0 100 100" fill="currentColor">
-                    <path d="M5,5 L40,5 C25,12 15,22 10,40 L10,90 C8,60 25,25 90,10 L5,5 Z M20,20 C35,25 45,35 50,50 C35,45 25,35 20,20 Z" />
-                    <circle cx="8" cy="8" r="3"/>
-                    <circle cx="88" cy="8" r="2"/>
-                    <circle cx="8" cy="88" r="2"/>
-                </svg>
-
-                <svg class="center-ornament-top" viewBox="0 0 200 30" fill="currentColor">
-                    <path d="M100,20 C80,5 50,5 10,15 C40,10 70,12 90,22 L100,27 L110,22 C130,12 160,10 190,15 C150,5 120,5 100,20 Z M100,5 L104,12 L100,15 L96,12 Z"/>
-                </svg>
-                <svg class="center-ornament-bottom" viewBox="0 0 200 30" fill="currentColor">
-                    <path d="M100,20 C80,5 50,5 10,15 C40,10 70,12 90,22 L100,27 L110,22 C130,12 160,10 190,15 C150,5 120,5 100,20 Z M100,5 L104,12 L100,15 L96,12 Z"/>
-                </svg>
-
-                <div class="bracket-hook hook-tl"></div>
-                <div class="bracket-hook hook-tr"></div>
-                <div class="bracket-hook hook-bl"></div>
-                <div class="bracket-hook hook-br"></div>
-
-                <div class="hero-inner-border">
-                    <div class="tagline">WE ARE GETTING MARRIED</div>
-
-                    <div class="couple-names">Kumaresh</div>
-                    <div class="ampersand">&</div>
-                    <div class="couple-names">Danamma</div>
-
-                    <div class="wedding-date">FRIDAY, DECEMBER 18, 2026</div>
-                    <div class="wedding-location">ALMATTI, KARNATAKA, INDIA</div>
-
-                    <div class="begun-text">OUR WEDDING HAS BEGUN!</div>
-
-                    <a href="#couple" class="timeline-btn">MEET THE COUPLE</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- SECOND PAGE: THE COUPLE SECTION (EXACT REFERENCE DESIGN) -->
-        <div class="couple-section" id="couple">
-            <h2 class="couple-heading">THE COUPLE</h2>
-
-            <div class="couple-divider">
-                <span>⚜</span>
-                <span>◆</span>
-                <span>⚜</span>
-            </div>
-
-            <p class="couple-tagline">Different Stories, One Beautiful Forever</p>
-
-            <div class="couple-cards-container">
-                
-                <!-- BRIDE CARD -->
-                <div class="person-card">
-                    <div class="avatar-frame">
-                        <!-- REPLACE bride.jpg WITH YOUR IMAGE FILE PATH -->
-                        <img class="avatar-img" src="bride.jpg" alt="Danamma - The Bride" onerror="this.src='https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=400&q=80'">
-                    </div>
-
-                    <div class="role-title">THE BRIDE</div>
-                    <div class="person-name">Danamma</div>
-
-                    <svg class="leaf-icon" viewBox="0 0 24 24" fill="#6A9A3B">
-                        <path d="M17,8C8,10 59,16.17 3.82,21.34L5.71,22L6.66,20.08C12,18 19,13 22,5C22,5 19,4 17,8Z"/>
-                    </svg>
-
-                    <p class="person-quote">"Dreaming of forever and grateful for every blessing that led to this moment"</p>
-                </div>
-
-                <!-- GROOM CARD -->
-                <div class="person-card">
-                    <div class="avatar-frame">
-                        <!-- REPLACE groom.jpg WITH YOUR IMAGE FILE PATH -->
-                        <img class="avatar-img" src="groom.jpg" alt="Kumaresh - The Groom" onerror="this.src='https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80'">
-                    </div>
-
-                    <div class="role-title">THE GROOM</div>
-                    <div class="person-name">Kumaresh</div>
-
-                    <svg class="leaf-icon" viewBox="0 0 24 24" fill="#6A9A3B">
-                        <path d="M17,8C8,10 59,16.17 3.82,21.34L5.71,22L6.66,20.08C12,18 19,13 22,5C22,5 19,4 17,8Z"/>
-                    </svg>
-
-                    <p class="person-quote">"Ready to walk hand in hand, creating endless memories and a lifetime of happiness"</p>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- TIMELINE SCHEDULE SECTION -->
-        <section id="schedule">
-            <h2 class="section-title">SCHEDULE OF EVENTS</h2>
-
-            <div class="timeline-item">
-                <div style="color:var(--primary-red); font-weight:700; font-size: 0.85rem;">MONDAY, DECEMBER 14, 2026</div>
-                <h3>WEDDING CANOPY CEREMONY</h3>
-                <p style="font-size: 0.85rem; color:#555;"><strong>Place:</strong> S K Goudar House</p>
-            </div>
-
-            <div class="timeline-item">
-                <div style="color:var(--primary-red); font-weight:700; font-size: 0.85rem;">THURSDAY, DECEMBER 17, 2026</div>
-                <h3>HALDI CEREMONY & RECEPTION</h3>
-                <p style="font-size: 0.85rem; color:#555;"><strong>Haldi:</strong> 9:00 AM | <strong>Reception:</strong> 6:00 PM</p>
-            </div>
-
-            <div class="timeline-item">
-                <div style="color:var(--primary-red); font-weight:700; font-size: 0.85rem;">FRIDAY, DECEMBER 18, 2026</div>
-                <h3>MUHURTHAM & RECEPTION</h3>
-                <p style="font-size: 0.85rem; color:#555;"><strong>Muhurtham:</strong> 9:44 AM | <strong>Reception:</strong> 12:26 PM</p>
-            </div>
-        </section>
-
-        <footer>
-            <p><strong>INVITED BY:</strong> Smt. Rukmeenibai @ Shankaralingappa Goudar</p>
-            <p style="margin-top: 6px;"><strong>WITH BEST COMPLIMENTS FROM:</strong> Smt. Chaitra & Muralidhar Koppal</p>
-            <p style="color: var(--gold-light); font-size: 1rem; margin-top: 16px; font-family:'Cinzel', serif;">Kumaresh & Danamma</p>
-        </footer>
-    </div>
-
-    <script>
-        /* --- MENU TOGGLE --- */
-        function toggleMenu() {
-            document.getElementById('menu-overlay').classList.toggle('menu-active');
-        }
-
-        function returnToCover() {
-            toggleMenu();
-            document.getElementById('cover-screen').classList.remove('cover-hidden');
-            document.getElementById('main-invitation').classList.remove('main-visible');
-        }
-
-        /* --- AUDIO CONTROLS --- */
-        const audio = document.getElementById('bg-music');
-        const musicBtn = document.getElementById('music-control');
-        let isPlaying = false;
-
-        function openInvitation() {
-            document.getElementById('cover-screen').classList.add('cover-hidden');
-            document.getElementById('main-invitation').classList.add('main-visible');
-            startAudio();
-        }
-
-        function startAudio() {
-            audio.currentTime = 0;
-            let playPromise = audio.play();
-
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    isPlaying = true;
-                    musicBtn.textContent = '🎵';
-                }).catch(err => {
-                    console.log("Autoplay restriction:", err);
-                    isPlaying = false;
-                    musicBtn.textContent = '🔇';
-                });
-            }
-        }
-
-        function toggleMusic() {
-            if (isPlaying) {
-                audio.pause();
-                musicBtn.textContent = '🔇';
-                isPlaying = false;
-            } else {
-                audio.play().then(() => {
-                    isPlaying = true;
-                    musicBtn.textContent = '🎵';
-                }).catch(err => {
-                    console.log("Audio toggle error:", err);
-                });
-            }
-        }
-
-        /* --- CONTINUOUS RESPONSIVE GLITTER & STAR ENGINE --- */
-        const canvas = document.getElementById('glitter-canvas');
-        const ctx = canvas.getContext('2d');
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        const particleCount = Math.min(Math.floor(window.innerWidth / 12), 80);
-        const particles = [];
-        const glitterColors = ['#FFFFFF', '#FFFDF5', '#F3E5AB', '#E8D28B', '#D4AF37'];
-
-        class Particle {
-            constructor() {
-                this.reset(true);
-            }
-
-            reset(initial = false) {
-                this.x = Math.random() * canvas.width;
-                this.y = initial ? Math.random() * canvas.height : -20;
-                this.size = Math.random() * 2.5 + 0.8;
-                this.speedY = Math.random() * 0.6 + 0.2;
-                this.speedX = Math.sin(Math.random() * Math.PI * 2) * 0.3;
-                this.color = glitterColors[Math.floor(Math.random() * glitterColors.length)];
-                this.opacity = Math.random() * 0.8 + 0.2;
-                this.twinkleSpeed = Math.random() * 0.03 + 0.01;
-                this.isStar = Math.random() > 0.4;
-                this.angle = Math.random() * Math.PI;
-                this.spinSpeed = (Math.random() - 0.5) * 0.02;
-            }
-
-            update() {
-                this.y += this.speedY;
-                this.x += Math.sin(this.y * 0.01) * 0.3 + this.speedX;
-                this.angle += this.spinSpeed;
-
-                this.opacity += Math.sin(Date.now() * this.twinkleSpeed) * 0.015;
-                if (this.opacity < 0.1) this.opacity = 0.1;
-                if (this.opacity > 1) this.opacity = 1;
-
-                if (this.y > canvas.height + 20 || this.x < -20 || this.x > canvas.width + 20) {
-                    this.reset(false);
-                }
-            }
-
-            draw() {
-                ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.rotate(this.angle);
-                ctx.globalAlpha = this.opacity;
-                ctx.fillStyle = this.color;
-                ctx.shadowBlur = this.size * 2;
-                ctx.shadowColor = this.color;
-
-                if (this.isStar) {
-                    ctx.beginPath();
-                    const outer = this.size * 2.2;
-                    const inner = this.size * 0.4;
-                    for (let i = 0; i < 4; i++) {
-                        ctx.lineTo(Math.cos((i * Math.PI) / 2) * outer, Math.sin((i * Math.PI) / 2) * outer);
-                        ctx.lineTo(Math.cos((i * Math.PI) / 2 + Math.PI / 4) * inner, Math.sin((i * Math.PI) / 2 + Math.PI / 4) * inner);
-                    }
-                    ctx.closePath();
-                    ctx.fill();
-                } else {
-                    ctx.beginPath();
-                    ctx.arc(0, 0, this.size, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-                ctx.restore();
-            }
-        }
-
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
-
-        function animateGlitter() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animateGlitter);
-        }
-
-        animateGlitter();
-    </script>
 </body>
 </html>

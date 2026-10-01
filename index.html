@@ -1,1049 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kumaresh & Danamma - Wedding Invitation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-red: #6A050B;
-            --dark-red: #4A0005;
-            --bg-maroon: #580308;
-            --gold: #C5A059;
-            --gold-dark: #8B6E32;
-            --gold-light: #F3E5AB;
-            --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-            --bg-cream: #FAF8F5;
-            --text-dark: #333333;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html, body {
-            width: 100%;
-            height: 100%;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Cinzel', serif;
-            background-color: var(--bg-cream);
-            color: var(--text-dark);
-            line-height: 1.6;
-            text-align: center;
-            position: relative;
-        }
-
-        /* --- WHITISH GLITTER BACKGROUND OVERLAY --- */
-        .whitish-glitter-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.85) 0%, rgba(250, 248, 245, 0.95) 100%),
-                        radial-gradient(ellipse at top, rgba(243, 229, 171, 0.25), transparent);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* --- CONTINUOUS GLITTER & STAR CANVAS --- */
-        #glitter-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 10001;
-        }
-
-        /* --- RESPONSIVE NAVIGATION HEADER BAR --- */
-        .nav-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            background: rgba(255, 253, 249, 0.95);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 max(20px, 4vw);
-            z-index: 9000;
-            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
-        }
-
-        .nav-monogram {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            letter-spacing: 4px;
-            color: #222;
-            font-weight: 600;
-        }
-
-        .menu-toggle {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #333;
-            padding: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* --- FULLSCREEN MENU OVERLAY --- */
-        #menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(255, 253, 249, 0.98);
-            backdrop-filter: blur(10px);
-            z-index: 99999;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 20px max(20px, 5vw) 40px max(20px, 5vw);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s ease;
-        }
-
-        #menu-overlay.menu-active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .menu-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .close-menu {
-            background: none;
-            border: none;
-            font-size: 1.6rem;
-            cursor: pointer;
-            color: #333;
-            padding: 5px;
-        }
-
-        .menu-links {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: clamp(16px, 3vh, 28px);
-            margin: auto 0;
-        }
-
-        .menu-links a {
-            text-decoration: none;
-            color: #222;
-            font-size: clamp(0.9rem, 2vw, 1.15rem);
-            letter-spacing: 3px;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .menu-links a:hover, .menu-links a.active {
-            color: var(--gold);
-        }
-
-        .menu-cover-btn {
-            background: #FAF5E8;
-            border: 1px solid var(--gold);
-            padding: 12px 25px;
-            border-radius: 25px;
-            color: #8A6D3B;
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin: 0 auto;
-            width: 100%;
-            max-width: 280px;
-            transition: all 0.3s ease;
-        }
-
-        .menu-cover-btn:hover {
-            background: var(--gold);
-            color: #fff;
-        }
-
-        /* --- FLOATING MUSIC BUTTON --- */
-        #music-control {
-            position: fixed;
-            bottom: clamp(15px, 3vh, 25px);
-            right: clamp(15px, 3vw, 25px);
-            z-index: 10000;
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            background: #FFFFFF;
-            border: 1px solid var(--gold);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        #music-control:hover {
-            transform: scale(1.08);
-        }
-
-        /* --- FRONT COVER SCREEN --- */
-        #cover-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: radial-gradient(circle at center, #800000 0%, #4a0005 100%);
-            z-index: 999999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
-            overflow: hidden;
-            padding: 20px;
-        }
-
-        .cover-border {
-            position: absolute;
-            top: clamp(10px, 2vh, 20px);
-            bottom: clamp(10px, 2vh, 20px);
-            left: clamp(10px, 2vw, 20px);
-            right: clamp(10px, 2vw, 20px);
-            border: 2px solid var(--gold);
-            border-radius: 12px;
-            pointer-events: none;
-        }
-
-        .cover-content {
-            z-index: 2;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: clamp(8px, 1.5vh, 16px);
-            max-width: 500px;
-            width: 100%;
-        }
-
-        .monogram {
-            font-family: 'Great Vibes', cursive;
-            font-size: clamp(3rem, 8vw, 4.5rem);
-            color: var(--gold-light);
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .cover-subtitle {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(0.8rem, 2vw, 1.05rem);
-            color: var(--gold-light);
-            letter-spacing: 2px;
-        }
-
-        .ganesha-frame {
-            width: clamp(100px, 20vh, 140px);
-            height: clamp(100px, 20vh, 140px);
-            margin: clamp(5px, 1vh, 12px) 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .ganesha-svg {
-            width: 80%;
-            height: 80%;
-            fill: url(#gold-grad);
-        }
-
-        .god-blessing {
-            font-family: 'Cinzel', serif;
-            color: var(--gold-light);
-            font-size: clamp(0.75rem, 1.8vw, 0.9rem);
-            letter-spacing: 3px;
-        }
-
-        .open-btn {
-            width: clamp(75px, 15vw, 90px);
-            height: clamp(75px, 15vw, 90px);
-            border-radius: 50%;
-            background: var(--gold-gradient);
-            color: var(--dark-red);
-            font-family: 'Cinzel', serif;
-            font-weight: 700;
-            font-size: clamp(0.85rem, 2vw, 1rem);
-            border: 2px solid var(--gold-light);
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
-            margin-top: clamp(10px, 2vh, 20px);
-            transition: transform 0.3s ease;
-        }
-
-        .open-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .cover-hidden {
-            transform: translateY(-100vh);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* --- MAIN CONTENT CONTAINER --- */
-        #main-invitation {
-            position: relative;
-            z-index: 1;
-            padding-top: 60px;
-            opacity: 0;
-            transition: opacity 1s ease 0.3s;
-            min-height: 100vh;
-            width: 100%;
-        }
-
-        .main-visible {
-            opacity: 1 !important;
-        }
-
-        /* --- FIRST PAGE: HERO CARD (PARCHMENT IMAGE STYLE) --- */
-        .hero-section {
-            padding: max(30px, 5vh) 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-
-        .hero-card {
-            width: min(92%, 480px);
-            margin: 0 auto;
-            position: relative;
-            border-radius: 6px;
-            box-shadow: 0 12px 35px rgba(139, 110, 50, 0.15);
-            background-color: #F8ECE1;
-            background-image: 
-                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.6) 0%, rgba(240, 218, 190, 0.5) 70%, rgba(218, 182, 142, 0.8) 100%),
-                radial-gradient(circle at 10% 20%, rgba(186, 137, 93, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(186, 137, 93, 0.15) 0%, transparent 40%);
-            overflow: hidden;
-            padding: 12px;
-        }
-
-        .corner-ornament {
-            position: absolute;
-            width: clamp(55px, 14vw, 85px);
-            height: clamp(55px, 14vw, 85px);
-            pointer-events: none;
-            z-index: 3;
-            color: #8C5331;
-        }
-
-        .corner-top-left { top: 6px; left: 6px; }
-        .corner-top-right { top: 6px; right: 6px; transform: scaleX(-1); }
-        .corner-bottom-left { bottom: 6px; left: 6px; transform: scaleY(-1); }
-        .corner-bottom-right { bottom: 6px; right: 6px; transform: scale(-1, -1); }
-
-        .center-ornament-top {
-            position: absolute;
-            top: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: clamp(100px, 25vw, 150px);
-            height: 25px;
-            color: #8C5331;
-            pointer-events: none;
-            z-index: 3;
-        }
-
-        .center-ornament-bottom {
-            position: absolute;
-            bottom: 8px;
-            left: 50%;
-            transform: translateX(-50%) rotate(180deg);
-            width: clamp(100px, 25vw, 150px);
-            height: 25px;
-            color: #8C5331;
-            pointer-events: none;
-            z-index: 3;
-        }
-
-        .hero-inner-border {
-            position: relative;
-            padding: clamp(45px, 6vh, 60px) clamp(20px, 5vw, 35px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 2;
-        }
-
-        .hero-inner-border::before, .hero-inner-border::after {
-            content: '';
-            position: absolute;
-            top: 10%;
-            bottom: 10%;
-            width: 1px;
-            background: #8C5331;
-            opacity: 0.85;
-        }
-
-        .hero-inner-border::before { left: 16px; }
-        .hero-inner-border::after { right: 16px; }
-
-        .bracket-hook {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            border-color: #8C5331;
-            border-style: solid;
-            pointer-events: none;
-            opacity: 0.85;
-        }
-
-        .hook-tl { top: 10%; left: 16px; border-width: 1px 0 0 1px; }
-        .hook-bl { bottom: 10%; left: 16px; border-width: 0 0 1px 1px; }
-        .hook-tr { top: 10%; right: 16px; border-width: 1px 1px 0 0; }
-        .hook-br { bottom: 10%; right: 16px; border-width: 0 1px 1px 0; }
-
-        .tagline {
-            font-size: clamp(0.68rem, 1.8vw, 0.8rem);
-            letter-spacing: 3px;
-            color: #5C4033;
-            font-weight: 600;
-            margin-bottom: clamp(20px, 4vh, 32px);
-        }
-
-        .couple-names {
-            font-family: 'Great Vibes', cursive;
-            font-size: clamp(2.8rem, 7vw, 3.8rem);
-            color: #6A1B1A;
-            line-height: 1.15;
-            margin: 2px 0;
-            font-weight: normal;
-        }
-
-        .ampersand {
-            font-family: 'Great Vibes', cursive;
-            font-size: clamp(1.8rem, 5vw, 2.3rem);
-            color: #8B6E32;
-            margin: 6px 0;
-        }
-
-        .wedding-date {
-            font-size: clamp(0.75rem, 1.8vw, 0.88rem);
-            letter-spacing: 2px;
-            color: #4A2E1A;
-            margin-top: clamp(25px, 4vh, 35px);
-            font-weight: 600;
-        }
-
-        .wedding-location {
-            font-size: clamp(0.7rem, 1.6vw, 0.8rem);
-            letter-spacing: 2px;
-            color: #6A4028;
-            margin-top: 8px;
-            font-weight: 500;
-        }
-
-        .begun-text {
-            font-size: clamp(0.72rem, 1.6vw, 0.8rem);
-            letter-spacing: 2px;
-            color: #5C4033;
-            margin-top: clamp(25px, 4vh, 35px);
-            font-weight: 600;
-        }
-
-        .timeline-btn {
-            display: inline-block;
-            margin-top: clamp(20px, 3vh, 28px);
-            padding: 12px clamp(20px, 4vw, 32px);
-            border: 1px solid #8C5331;
-            background: rgba(255, 253, 249, 0.9);
-            color: #4A2E1A;
-            font-family: 'Cinzel', serif;
-            font-size: clamp(0.68rem, 1.5vw, 0.75rem);
-            letter-spacing: 2px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .timeline-btn:hover {
-            background: #8C5331;
-            color: #fff;
-        }
-
-        /* --- SECOND PAGE: THE COUPLE SECTION (MATCHING REFERENCE IMAGE 2) --- */
-        .couple-section {
-            background-color: var(--bg-maroon);
-            background-image: 
-                radial-gradient(circle at 50% 30%, rgba(138, 12, 22, 0.8) 0%, rgba(60, 0, 5, 0.95) 100%),
-                radial-gradient(circle at 10% 80%, rgba(20, 0, 2, 0.5) 0%, transparent 50%);
-            padding: clamp(50px, 8vh, 80px) 20px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            box-shadow: inset 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 -10px 30px rgba(0, 0, 0, 0.4);
-        }
-
-        .couple-heading {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(1.8rem, 5vw, 2.6rem);
-            letter-spacing: 6px;
-            color: var(--gold-light);
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .couple-divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            color: var(--gold);
-            font-size: 0.9rem;
-            margin-bottom: 16px;
-        }
-
-        .couple-tagline {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(0.72rem, 2vw, 0.95rem);
-            letter-spacing: 3px;
-            color: #F8E5BB;
-            font-weight: 500;
-            max-width: 500px;
-            margin-bottom: clamp(35px, 6vh, 55px);
-            text-transform: uppercase;
-        }
-
-        .couple-cards-container {
-            display: flex;
-            flex-direction: column;
-            gap: clamp(30px, 5vh, 45px);
-            width: min(92%, 480px);
-            margin: 0 auto;
-        }
-
-        /* CREAM PROFILE CARD */
-        .person-card {
-            background-color: #FAF5EE;
-            background-image: radial-gradient(circle at 50% 50%, #FFFFFF 0%, #FAF2E6 100%);
-            border-radius: 8px;
-            border: 1px solid rgba(197, 160, 89, 0.4);
-            padding: clamp(25px, 4vh, 35px) clamp(20px, 4vw, 30px);
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* CARD DOUBLE BORDER */
-        .person-card::after {
-            content: '';
-            position: absolute;
-            top: 6px;
-            bottom: 6px;
-            left: 6px;
-            right: 6px;
-            border: 1px solid rgba(197, 160, 89, 0.3);
-            border-radius: 5px;
-            pointer-events: none;
-        }
-
-        /* CIRCULAR AVATAR FRAME */
-        .avatar-frame {
-            width: clamp(100px, 22vw, 125px);
-            height: clamp(100px, 22vw, 125px);
-            border-radius: 50%;
-            padding: 4px;
-            background: var(--gold-gradient);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-            margin-bottom: 18px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .avatar-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            background-color: #FFF;
-            display: block;
-        }
-
-        .role-title {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(0.7rem, 1.8vw, 0.8rem);
-            letter-spacing: 3px;
-            color: #7A5B28;
-            font-weight: 600;
-            text-transform: uppercase;
-            margin-bottom: 6px;
-        }
-
-        .person-name {
-            font-family: 'Great Vibes', cursive;
-            font-size: clamp(2.4rem, 6vw, 3.2rem);
-            color: #6A050B;
-            font-weight: normal;
-            margin-bottom: 14px;
-            line-height: 1.1;
-        }
-
-        .leaf-icon {
-            width: 22px;
-            height: 22px;
-            margin-bottom: 14px;
-        }
-
-        .person-quote {
-            font-family: 'Cinzel', serif;
-            font-style: italic;
-            font-size: clamp(0.75rem, 1.8vw, 0.85rem);
-            color: #555555;
-            line-height: 1.6;
-            max-width: 380px;
-        }
-
-        /* --- OTHER SECTIONS --- */
-        section {
-            padding: clamp(40px, 6vh, 60px) 20px;
-            width: min(92%, 650px);
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: clamp(1.1rem, 3vw, 1.4rem);
-            letter-spacing: 3px;
-            color: #222;
-            margin-bottom: clamp(20px, 4vh, 35px);
-        }
-
-        .timeline-item {
-            background: rgba(255, 255, 255, 0.88);
-            border-left: 3px solid var(--gold);
-            margin: 16px 0;
-            padding: clamp(16px, 3vw, 24px);
-            text-align: left;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-            font-family: 'Montserrat', sans-serif;
-            backdrop-filter: blur(3px);
-            border-radius: 0 4px 4px 0;
-        }
-
-        .timeline-item h3 {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(0.9rem, 2vw, 1.05rem);
-            margin: 6px 0;
-            color: #222;
-        }
-
-        footer {
-            width: 100%;
-            background-color: #1A0002;
-            color: #FFF;
-            padding: clamp(30px, 5vh, 50px) 20px;
-            border-top: 2px solid var(--gold);
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(0.78rem, 1.8vw, 0.88rem);
-            position: relative;
-            z-index: 2;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S & R - The Celebration</title>
+  
+  <!-- Google Fonts for Elegant Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Montserrat:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* Reset & Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #5c0612;
+      background-image: 
+        radial-gradient(circle at 50% 20%, rgba(255, 215, 0, 0.18), transparent 45%),
+        radial-gradient(circle at 10% 70%, rgba(255, 215, 0, 0.12), transparent 35%),
+        linear-gradient(135deg, #42020a 0%, #630815 50%, #330107 100%);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Top Navigation Header */
+    header {
+      width: 100%;
+      max-width: 480px;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #fcf9f2;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: #2c2c2c;
+    }
+
+    .menu-btn {
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      color: #2c2c2c;
+      cursor: pointer;
+    }
+
+    /* Main Container */
+    .container {
+      width: 100%;
+      max-width: 480px;
+      padding: 25px 18px 80px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+    }
+
+    /* Section Header */
+    .section-title-container {
+      text-align: center;
+      color: #f7db8b;
+      margin-bottom: 5px;
+    }
+
+    .main-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.1rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+
+    .ornament {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      color: #d4af37;
+      font-size: 0.8rem;
+    }
+
+    .subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #ebd188;
+      line-height: 1.6;
+    }
+
+    /* Cream Card Container */
+    .card {
+      background: #fdfbf7;
+      border-radius: 4px;
+      border: 1px solid #e1cf9e;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 0 0 6px #fdfbf7, inset 0 0 0 7px #e1cf9e;
+      width: 100%;
+      padding: 32px 22px;
+      text-align: center;
+      position: relative;
+    }
+
+    /* Full Traditional Couple Portrait Card Frame */
+    .artwork-card {
+      background: #ffffff;
+      border-radius: 4px;
+      padding: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      width: 100%;
+    }
+
+    .artwork-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 2px;
+    }
+
+    .role-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      color: #8a6c22;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .person-name {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      color: #382b1c;
+      margin-bottom: 12px;
+      font-weight: 400;
+      line-height: 1.1;
+    }
+
+    .leaf-icon {
+      width: 22px;
+      height: 22px;
+      margin: 0 auto 14px auto;
+      display: block;
+    }
+
+    .quote {
+      font-style: italic;
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.6;
+      font-weight: 300;
+      padding: 0 8px;
+    }
+
+    /* Floating Music Button */
+    .music-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .music-btn i {
+      font-size: 1rem;
+      color: #333;
+    }
+
+    /* Sparkles Effect */
+    .sparkle {
+      position: absolute;
+      background: rgba(255, 223, 118, 0.7);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- WHITISH GLITTER BACKGROUND LAYER -->
-    <div class="whitish-glitter-bg"></div>
+  <!-- Navigation Header -->
+  <header>
+    <div class="logo">S & R</div>
+    <button class="menu-btn" aria-label="Toggle Menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </header>
 
-    <!-- CANVAS FOR ANIMATED STAR & GLITTER FLOATING PARTICLES -->
-    <canvas id="glitter-canvas"></canvas>
-
-    <!-- TOP HEADER WITH MONOGRAM & MENU -->
-    <nav class="nav-header">
-        <div class="nav-monogram">K & D</div>
-        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open Menu">☰</button>
-    </nav>
-
-    <!-- SLIDE-OUT FULLSCREEN MENU OVERLAY -->
-    <div id="menu-overlay">
-        <div class="menu-header">
-            <div class="nav-monogram">K & D</div>
-            <button class="close-menu" onclick="toggleMenu()" aria-label="Close Menu">✕</button>
-        </div>
-        <div class="menu-links">
-            <a href="#home" class="active" onclick="toggleMenu()">HOME</a>
-            <a href="#couple" onclick="toggleMenu()">COUPLE</a>
-            <a href="#schedule" onclick="toggleMenu()">TIMELINE</a>
-            <a href="#gallery" onclick="toggleMenu()">GALLERY</a>
-            <a href="#events" onclick="toggleMenu()">EVENTS</a>
-            <a href="#blessings" onclick="toggleMenu()">BLESSINGS</a>
-        </div>
-        <button class="menu-cover-btn" onclick="returnToCover()">
-            📜 Invitation Cover
-        </button>
+  <main class="container">
+    
+    <!-- Section Header -->
+    <div class="section-title-container">
+      <h1 class="main-title">TOGETHER FOREVER</h1>
+      <div class="ornament">
+        <span>&#10038;</span>
+        <span>&#9670;</span>
+        <span>&#10038;</span>
+      </div>
+      <p class="subtitle">JOIN US IN CELEBRATING OUR SPECIAL DAY</p>
     </div>
 
-    <!-- AUDIO ELEMENT -->
-    <audio id="bg-music" loop playsinline preload="auto">
-        <source src="music.mp3" type="audio/mpeg">
-        <source src="music.m4a" type="audio/mp4">
-        <source src="music.ogg" type="audio/ogg">
-    </audio>
+    <!-- Traditional Couple Artwork Card -->
+    <section class="artwork-card">
+      <!-- Replace with your actual full couple illustration image URL -->
+      <img class="artwork-img" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 450'><rect width='400' height='450' fill='%23f9ebd2'/><text x='50%' y='48%' dominant-baseline='middle' text-anchor='middle' font-size='20' fill='%235c0612' font-family='sans-serif'>Swapnitha &amp; Ravinandan Illustration</text></svg>" alt="Swapnitha and Ravinandan Traditional Artwork">
+    </section>
 
-    <!-- FLOATING MUSIC BUTTON -->
-    <button id="music-control" onclick="toggleMusic()" aria-label="Toggle Music">🎵</button>
+    <!-- Invitation Details Card -->
+    <section class="card">
+      <div class="role-label">WEDDING CELEBRATION</div>
+      <h2 class="person-name" style="font-size: 2.6rem;">Save The Date</h2>
+      
+      <!-- Leaf Accent -->
+      <svg class="leaf-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 3C7 3 3 8 3 13C3 17.5 6.5 21 11 21C11.5 21 12 20.5 12 20C12 15 16 11 21 11C21.5 11 22 10.5 22 10C22 5.5 17.5 3 12 3Z" fill="#71a062"/>
+      </svg>
 
-    <svg width="0" height="0" style="position:absolute;">
-        <defs>
-            <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#bf953f" />
-                <stop offset="50%" stop-color="#b38728" />
-                <stop offset="100%" stop-color="#aa771c" />
-            </linearGradient>
-        </defs>
-    </svg>
+      <p class="quote" style="font-style: normal; font-weight: 400; color: #333;">
+        "Two lives, two hearts, joined together in friendship, united forever in love. We request the pleasure of your company as we celebrate our marriage."
+      </p>
+    </section>
 
-    <!-- FRONT COVER SCREEN -->
-    <div id="cover-screen">
-        <div class="cover-border"></div>
-        <div class="cover-content">
-            <div class="monogram">K & D</div>
-            <p class="cover-subtitle">And So, Our Journey Begins</p>
+  </main>
 
-            <div class="ganesha-frame">
-                <svg class="ganesha-svg" viewBox="0 0 24 24">
-                    <path d="M12,2A3,3 0 0,0 9,5C9,6.1 9.6,7.05 10.5,7.56C8.42,8.37 7,10.41 7,12.8C7,14.58 7.82,16.17 9.1,17.22C8.4,18.05 8,19.1 8,20.25A1.75,1.75 0 0,0 9.75,22H14.25A1.75,1.75 0 0,0 16,20.25C16,19.1 15.6,18.05 14.9,17.22C16.18,16.17 17,14.58 17,12.8C17,10.41 15.58,8.37 13.5,7.56C14.4,7.05 15,6.1 15,5A3,3 0 0,0 12,2M12,4A1,1 0 0,1 13,5A1,1 0 0,1 12,6A1,1 0 0,1 11,5A1,1 0 0,1 12,4M12,9A4,4 0 0,1 16,13C16,14.6 15.1,15.9 13.8,16.5C13.3,16.7 12.7,16.8 12,16.8C11.3,16.8 10.7,16.7 10.2,16.5C8.9,15.9 8,14.6 8,13A4,4 0 0,1 12,9Z"/>
-                </svg>
-            </div>
+  <!-- Floating Audio Button -->
+  <button class="music-btn" id="musicToggle" aria-label="Toggle Music">
+    <i class="fa-solid fa-music"></i>
+  </button>
 
-            <div class="god-blessing">SRI KULADEVATHA PRASANNA</div>
+  <audio id="bgMusic" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
 
-            <button class="open-btn" onclick="openInvitation()">OPEN</button>
-        </div>
-    </div>
+  <script>
+    // Music Toggle
+    const musicBtn = document.getElementById('musicToggle');
+    const bgMusic = document.getElementById('bgMusic');
+    let isPlaying = false;
 
-    <!-- MAIN INVITATION CONTENT -->
-    <div id="main-invitation">
-        
-        <!-- FIRST PAGE: HERO CARD -->
-        <div class="hero-section" id="home">
-            <div class="hero-card">
-                
-                <!-- SVG CORNER ORNAMENTS -->
-                <svg class="corner-ornament corner-top-left" viewBox="0 0 100 100" fill="currentColor">
-                    <path d="M5,5 L40,5 C25,12 15,22 10,40 L10,90 C8,60 25,25 90,10 L5,5 Z M20,20 C35,25 45,35 50,50 C35,45 25,35 20,20 Z" />
-                    <circle cx="8" cy="8" r="3"/>
-                    <circle cx="88" cy="8" r="2"/>
-                    <circle cx="8" cy="88" r="2"/>
-                </svg>
-                <svg class="corner-ornament corner-top-right" viewBox="0 0 100 100" fill="currentColor">
-                    <path d="M5,5 L40,5 C25,12 15,22 10,40 L10,90 C8,60 25,25 90,10 L5,5 Z M20,20 C35,25 45,35 50,50 C35,45 25,35 20,20 Z" />
-                    <circle cx="8" cy="8" r="3"/>
-                    <circle cx="88" cy="8" r="2"/>
-                    <circle cx="8" cy="88" r="2"/>
-                </svg>
-                <svg class="corner-ornament corner-bottom-left" viewBox="0 0 100 100" fill="currentColor">
-                    <path d="M5,5 L40,5 C25,12 15,22 10,40 L10,90 C8,60 25,25 90,10 L5,5 Z M20,20 C35,25 45,35 50,50 C35,45 25,35 20,20 Z" />
-                    <circle cx="8" cy="8" r="3"/>
-                    <circle cx="88" cy="8" r="2"/>
-                    <circle cx="8" cy="88" r="2"/>
-                </svg>
-                <svg class="corner-ornament corner-bottom-right" viewBox="0 0 100 100" fill="currentColor">
-                    <path d="M5,5 L40,5 C25,12 15,22 10,40 L10,90 C8,60 25,25 90,10 L5,5 Z M20,20 C35,25 45,35 50,50 C35,45 25,35 20,20 Z" />
-                    <circle cx="8" cy="8" r="3"/>
-                    <circle cx="88" cy="8" r="2"/>
-                    <circle cx="8" cy="88" r="2"/>
-                </svg>
+    musicBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        bgMusic.pause();
+        musicBtn.querySelector('i').className = 'fa-solid fa-music';
+      } else {
+        bgMusic.play().catch(e => console.log("Audio playback blocked by browser"));
+        musicBtn.querySelector('i').className = 'fa-solid fa-pause';
+      }
+      isPlaying = !isPlaying;
+    });
 
-                <svg class="center-ornament-top" viewBox="0 0 200 30" fill="currentColor">
-                    <path d="M100,20 C80,5 50,5 10,15 C40,10 70,12 90,22 L100,27 L110,22 C130,12 160,10 190,15 C150,5 120,5 100,20 Z M100,5 L104,12 L100,15 L96,12 Z"/>
-                </svg>
-                <svg class="center-ornament-bottom" viewBox="0 0 200 30" fill="currentColor">
-                    <path d="M100,20 C80,5 50,5 10,15 C40,10 70,12 90,22 L100,27 L110,22 C130,12 160,10 190,15 C150,5 120,5 100,20 Z M100,5 L104,12 L100,15 L96,12 Z"/>
-                </svg>
+    // Background Sparkles Generator
+    function createSparkles() {
+      const body = document.body;
+      for (let i = 0; i < 20; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        const size = Math.random() * 4 + 2;
+        sparkle.style.width = `${size}px`;
+        sparkle.style.height = `${size}px`;
+        sparkle.style.top = `${Math.random() * 100}%`;
+        sparkle.style.left = `${Math.random() * 100}%`;
+        sparkle.style.opacity = Math.random() * 0.7 + 0.3;
+        body.appendChild(sparkle);
+      }
+    }
 
-                <div class="bracket-hook hook-tl"></div>
-                <div class="bracket-hook hook-tr"></div>
-                <div class="bracket-hook hook-bl"></div>
-                <div class="bracket-hook hook-br"></div>
-
-                <div class="hero-inner-border">
-                    <div class="tagline">WE ARE GETTING MARRIED</div>
-
-                    <div class="couple-names">Kumaresh</div>
-                    <div class="ampersand">&</div>
-                    <div class="couple-names">Danamma</div>
-
-                    <div class="wedding-date">FRIDAY, DECEMBER 18, 2026</div>
-                    <div class="wedding-location">ALMATTI, KARNATAKA, INDIA</div>
-
-                    <div class="begun-text">OUR WEDDING HAS BEGUN!</div>
-
-                    <a href="#couple" class="timeline-btn">MEET THE COUPLE</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- SECOND PAGE: THE COUPLE SECTION (EXACT REFERENCE DESIGN) -->
-        <div class="couple-section" id="couple">
-            <h2 class="couple-heading">THE COUPLE</h2>
-
-            <div class="couple-divider">
-                <span>⚜</span>
-                <span>◆</span>
-                <span>⚜</span>
-            </div>
-
-            <p class="couple-tagline">Different Stories, One Beautiful Forever</p>
-
-            <div class="couple-cards-container">
-                
-                <!-- BRIDE CARD -->
-                <div class="person-card">
-                    <div class="avatar-frame">
-                        <!-- REPLACE bride.jpg WITH YOUR IMAGE FILE PATH -->
-                        <img class="avatar-img" src="bride.jpg" alt="Danamma - The Bride" onerror="this.src='https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=400&q=80'">
-                    </div>
-
-                    <div class="role-title">THE BRIDE</div>
-                    <div class="person-name">Danamma</div>
-
-                    <svg class="leaf-icon" viewBox="0 0 24 24" fill="#6A9A3B">
-                        <path d="M17,8C8,10 59,16.17 3.82,21.34L5.71,22L6.66,20.08C12,18 19,13 22,5C22,5 19,4 17,8Z"/>
-                    </svg>
-
-                    <p class="person-quote">"Dreaming of forever and grateful for every blessing that led to this moment"</p>
-                </div>
-
-                <!-- GROOM CARD -->
-                <div class="person-card">
-                    <div class="avatar-frame">
-                        <!-- REPLACE groom.jpg WITH YOUR IMAGE FILE PATH -->
-                        <img class="avatar-img" src="groom.jpg" alt="Kumaresh - The Groom" onerror="this.src='https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80'">
-                    </div>
-
-                    <div class="role-title">THE GROOM</div>
-                    <div class="person-name">Kumaresh</div>
-
-                    <svg class="leaf-icon" viewBox="0 0 24 24" fill="#6A9A3B">
-                        <path d="M17,8C8,10 59,16.17 3.82,21.34L5.71,22L6.66,20.08C12,18 19,13 22,5C22,5 19,4 17,8Z"/>
-                    </svg>
-
-                    <p class="person-quote">"Ready to walk hand in hand, creating endless memories and a lifetime of happiness"</p>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- TIMELINE SCHEDULE SECTION -->
-        <section id="schedule">
-            <h2 class="section-title">SCHEDULE OF EVENTS</h2>
-
-            <div class="timeline-item">
-                <div style="color:var(--primary-red); font-weight:700; font-size: 0.85rem;">MONDAY, DECEMBER 14, 2026</div>
-                <h3>WEDDING CANOPY CEREMONY</h3>
-                <p style="font-size: 0.85rem; color:#555;"><strong>Place:</strong> S K Goudar House</p>
-            </div>
-
-            <div class="timeline-item">
-                <div style="color:var(--primary-red); font-weight:700; font-size: 0.85rem;">THURSDAY, DECEMBER 17, 2026</div>
-                <h3>HALDI CEREMONY & RECEPTION</h3>
-                <p style="font-size: 0.85rem; color:#555;"><strong>Haldi:</strong> 9:00 AM | <strong>Reception:</strong> 6:00 PM</p>
-            </div>
-
-            <div class="timeline-item">
-                <div style="color:var(--primary-red); font-weight:700; font-size: 0.85rem;">FRIDAY, DECEMBER 18, 2026</div>
-                <h3>MUHURTHAM & RECEPTION</h3>
-                <p style="font-size: 0.85rem; color:#555;"><strong>Muhurtham:</strong> 9:44 AM | <strong>Reception:</strong> 12:26 PM</p>
-            </div>
-        </section>
-
-        <footer>
-            <p><strong>INVITED BY:</strong> Smt. Rukmeenibai @ Shankaralingappa Goudar</p>
-            <p style="margin-top: 6px;"><strong>WITH BEST COMPLIMENTS FROM:</strong> Smt. Chaitra & Muralidhar Koppal</p>
-            <p style="color: var(--gold-light); font-size: 1rem; margin-top: 16px; font-family:'Cinzel', serif;">Kumaresh & Danamma</p>
-        </footer>
-    </div>
-
-    <script>
-        /* --- MENU TOGGLE --- */
-        function toggleMenu() {
-            document.getElementById('menu-overlay').classList.toggle('menu-active');
-        }
-
-        function returnToCover() {
-            toggleMenu();
-            document.getElementById('cover-screen').classList.remove('cover-hidden');
-            document.getElementById('main-invitation').classList.remove('main-visible');
-        }
-
-        /* --- AUDIO CONTROLS --- */
-        const audio = document.getElementById('bg-music');
-        const musicBtn = document.getElementById('music-control');
-        let isPlaying = false;
-
-        function openInvitation() {
-            document.getElementById('cover-screen').classList.add('cover-hidden');
-            document.getElementById('main-invitation').classList.add('main-visible');
-            startAudio();
-        }
-
-        function startAudio() {
-            audio.currentTime = 0;
-            let playPromise = audio.play();
-
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    isPlaying = true;
-                    musicBtn.textContent = '🎵';
-                }).catch(err => {
-                    console.log("Autoplay restriction:", err);
-                    isPlaying = false;
-                    musicBtn.textContent = '🔇';
-                });
-            }
-        }
-
-        function toggleMusic() {
-            if (isPlaying) {
-                audio.pause();
-                musicBtn.textContent = '🔇';
-                isPlaying = false;
-            } else {
-                audio.play().then(() => {
-                    isPlaying = true;
-                    musicBtn.textContent = '🎵';
-                }).catch(err => {
-                    console.log("Audio toggle error:", err);
-                });
-            }
-        }
-
-        /* --- CONTINUOUS RESPONSIVE GLITTER & STAR ENGINE --- */
-        const canvas = document.getElementById('glitter-canvas');
-        const ctx = canvas.getContext('2d');
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        const particleCount = Math.min(Math.floor(window.innerWidth / 12), 80);
-        const particles = [];
-        const glitterColors = ['#FFFFFF', '#FFFDF5', '#F3E5AB', '#E8D28B', '#D4AF37'];
-
-        class Particle {
-            constructor() {
-                this.reset(true);
-            }
-
-            reset(initial = false) {
-                this.x = Math.random() * canvas.width;
-                this.y = initial ? Math.random() * canvas.height : -20;
-                this.size = Math.random() * 2.5 + 0.8;
-                this.speedY = Math.random() * 0.6 + 0.2;
-                this.speedX = Math.sin(Math.random() * Math.PI * 2) * 0.3;
-                this.color = glitterColors[Math.floor(Math.random() * glitterColors.length)];
-                this.opacity = Math.random() * 0.8 + 0.2;
-                this.twinkleSpeed = Math.random() * 0.03 + 0.01;
-                this.isStar = Math.random() > 0.4;
-                this.angle = Math.random() * Math.PI;
-                this.spinSpeed = (Math.random() - 0.5) * 0.02;
-            }
-
-            update() {
-                this.y += this.speedY;
-                this.x += Math.sin(this.y * 0.01) * 0.3 + this.speedX;
-                this.angle += this.spinSpeed;
-
-                this.opacity += Math.sin(Date.now() * this.twinkleSpeed) * 0.015;
-                if (this.opacity < 0.1) this.opacity = 0.1;
-                if (this.opacity > 1) this.opacity = 1;
-
-                if (this.y > canvas.height + 20 || this.x < -20 || this.x > canvas.width + 20) {
-                    this.reset(false);
-                }
-            }
-
-            draw() {
-                ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.rotate(this.angle);
-                ctx.globalAlpha = this.opacity;
-                ctx.fillStyle = this.color;
-                ctx.shadowBlur = this.size * 2;
-                ctx.shadowColor = this.color;
-
-                if (this.isStar) {
-                    ctx.beginPath();
-                    const outer = this.size * 2.2;
-                    const inner = this.size * 0.4;
-                    for (let i = 0; i < 4; i++) {
-                        ctx.lineTo(Math.cos((i * Math.PI) / 2) * outer, Math.sin((i * Math.PI) / 2) * outer);
-                        ctx.lineTo(Math.cos((i * Math.PI) / 2 + Math.PI / 4) * inner, Math.sin((i * Math.PI) / 2 + Math.PI / 4) * inner);
-                    }
-                    ctx.closePath();
-                    ctx.fill();
-                } else {
-                    ctx.beginPath();
-                    ctx.arc(0, 0, this.size, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-                ctx.restore();
-            }
-        }
-
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
-
-        function animateGlitter() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animateGlitter);
-        }
-
-        animateGlitter();
-    </script>
+    document.addEventListener('DOMContentLoaded', createSparkles);
+  </script>
 </body>
 </html>
